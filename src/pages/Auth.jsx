@@ -12,29 +12,53 @@ function Auth (props) {
         password: ""
     })
 
-    
+    const {state, dispatch} = useAppState()
+
+    React.useEffect(()=>{
+        if (userData){
+            console.log(userData);
+            const {token, user} = userData;
+            dispatch({type: "auth", payload: { token, email: user.email}})
+        }
+    })    
 
     const actions = {
-        signup: {
-            action: "signup",
-            payload: formData
-        },
-        login: {
-            action: "login",
-            payload: formData
-        }
+        signup: () =>{
+            fetch(state.url+ "/users/",{
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then( response => console.log(response.json())
+                )},
+        
+        login: ()=>{
+            fetch(state.url+ "/login/",{
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then( response => response.json())}
     }
+
+    const [userData, setUserData] = useState(null)
 
     const handleChange = (event) =>{
         setFormData({...formData, [event.target.name]: event.target.value})
     }
 
-    const {dispatch} = useAppState()
-    
+
+
     const handleSubmit = (event) =>{
-        event.preventDefault()
-        dispatch(actions[type])
+        event.preventDefault();
+        actions[type]().then((data) => console.log(data));
     }
+
+    console.log(actions[type])
 
     return(
         <div>

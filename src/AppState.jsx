@@ -16,29 +16,18 @@ const initialState = {
 /////////////////////////
 // action = {type: "", payload: ---}
 const reducer = (state, action)=>{
+    let newState;
     switch(action.type){
-        case "signup":
-            fetch(state.url+ "/users/",{
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(action.payload)
-            })
-            .then( response => response.json())
-            .then( user => {return {...state, token: user.token, email: user.email}})
-        case "login":
-            fetch(state.url+ "/login",{
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(action.payload)
-            })
-            .then( response => response.json())
-            .then( user => {return {...state, token: user.token, email: user.email}})
+        case  "auth":
+            newState = {...state, ...action.payload}
+            return newState
+        break;
+
+        
         default:
             return state
+            
+            
     }
 }
 
@@ -57,7 +46,7 @@ export function AppState (props){
     const [state, dispatch] = useReducer(reducer, initialState)
 
     return(
-        <AppContext.Provider value={state, dispatch}>
+        <AppContext.Provider value={{state, dispatch}}>
             {props.children}
         </AppContext.Provider>
     )
@@ -65,7 +54,7 @@ export function AppState (props){
 
 
 /////////////////////////
-// USE APPSTSTE HOOK
+// USE APPSTATE HOOK
 /////////////////////////
 // Create a custom hook for app state
 
