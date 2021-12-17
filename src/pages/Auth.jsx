@@ -55,7 +55,7 @@ function Auth (props) {
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        actions[type]().then((data) => console.log(data));
+        actions[type].then((data) => console.log(data));
     }
 
     console.log(actions[type])
