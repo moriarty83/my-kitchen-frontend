@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useParams } from "react-router-dom"
+import {useParams, Navigate } from "react-router-dom"
 import { useAppState } from "../AppState"
 
 function Auth (props) {
@@ -12,6 +12,9 @@ function Auth (props) {
         password: ""
     })
 
+    const [userData, setUserData] = useState(null)
+
+
     const {state, dispatch} = useAppState()
 
     React.useEffect(()=>{
@@ -19,23 +22,26 @@ function Auth (props) {
             console.log(userData);
             const {token, user} = userData;
             dispatch({type: "auth", payload: { token, email: user.email}})
+            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email}))
+           
         }
-    })    
+    }, [userData])    
 
     const actions = {
         signup: () =>{
-            fetch(state.url+ "/users/",{
+            console.log(formData)
+            return fetch(state.url+ "/users/",{
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formData)
             })
-            .then( response => console.log(response.json())
+            .then( response => response.json()
                 )},
         
         login: ()=>{
-            fetch(state.url+ "/login/",{
+            return fetch(state.url+ "/login/",{
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -43,9 +49,9 @@ function Auth (props) {
                 body: JSON.stringify(formData)
             })
             .then( response => response.json())}
+        
     }
 
-    const [userData, setUserData] = useState(null)
 
     const handleChange = (event) =>{
         setFormData({...formData, [event.target.name]: event.target.value})
@@ -55,13 +61,13 @@ function Auth (props) {
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        actions[type].then((data) => console.log(data));
+        actions[type]().then((data) => {setUserData(data)});
     }
 
-    console.log(actions[type])
 
     return(
         <div>
+            { userData ? <Navigate to="/dashboard" replace={true} /> : ""}
             <form onSubmit={handleSubmit}>
                 <input type="email" name="email" onChange={handleChange}/>
                 <input type="password" name="password" onChange={handleChange}/>
