@@ -8,6 +8,7 @@ import Home from '../pages/Home';
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard';
 import Ingredients from './Ingredients';
+import Recipes from './Recipes';
 import ShowIngredient from '../pages/ShowIngredient';
 
 
@@ -34,6 +35,7 @@ function App(props) {
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
+      <Route path="/mykitchen/recipes" element={<Recipes />} /> 
       <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} /> 
       <Route path="/dashboard" element={<Dashboard/>} />
     </Routes>

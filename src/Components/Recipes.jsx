@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { useAppState } from "../AppState"
 
+import Search from "./Search";
+
 function Recipes () {
 /////////////////////
     // EDEMAM API SECTION
@@ -14,23 +16,29 @@ function Recipes () {
     const [searchTerm, setSearchTerm] = useState()
 
     // URL For API Request
-    const ingredientURL = `https://api.edamam.com/api/recipes/v2/app_id=${id}&app_key=${key}&q=${searchTerm}&limit=20`
+    const recipeURL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${id}&app_key=${key}&q=${searchTerm}`
 
-    const getIngredients = ()=>{
-        fetch(ingredientURL,{
+    const getRecipes = ()=>{
+        fetch(recipeURL,{
             method: "get",
             headers: {
-                "Content-Type": "application/json"
             },
             })
             .then( response => response.json()
                 ). then( (data)=>
-                setIngredients(data))}
+                setRecipes(data))}
     
-    let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
+    // let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
 
-    useEffect(getIngredients, [searchTerm])
+    useEffect(()=>{if(searchTerm){getRecipes()}}, [searchTerm])
 
+    return(
+        <>
+            <h1>Recipes</h1>
+            <p>{JSON.stringify(recipes)}</p>
+            <Search setSearchTerm={setSearchTerm}/>
+        </>
+    )
 }
 
 export default Recipes
