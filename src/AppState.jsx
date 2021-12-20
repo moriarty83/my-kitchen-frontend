@@ -8,7 +8,9 @@ import React, { useReducer } from 'react';
 const initialState = {
     url: "http://localhost:3000",
     token: null,
-    email: null
+    email: null,
+    myIngredients: null
+
 }
 
 /////////////////////////
@@ -17,6 +19,7 @@ const initialState = {
 // action = {type: "", payload: ---}
 const reducer = (state, action)=>{
     let newState;
+    console.log("Payload: " + action.payload)
     switch(action.type){
         case  "auth":
             newState = {...state, ...action.payload}
@@ -27,6 +30,10 @@ const reducer = (state, action)=>{
             window.localStorage.removeItem("auth")
             return newState
             
+        case "myIngredients":
+            console.log("fired my ingredients")
+            newState = {...state, myIngredients: action.payload}
+            return newState
         default:
             return state
             

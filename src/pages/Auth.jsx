@@ -48,7 +48,9 @@ function Auth (props) {
                 },
                 body: JSON.stringify(formData)
             })
-            .then( response => response.json())}
+            .then( response => response.json())
+            
+        }
         
     }
 

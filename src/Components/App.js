@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState,useEffect } from 'react'
 
 import {Routes, Route} from 'react-router-dom'
 import {useAppState} from "../AppState"
@@ -8,21 +8,22 @@ import Home from '../pages/Home';
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard';
 import Ingredients from './Ingredients';
+import ShowIngredient from '../pages/ShowIngredient';
 
 
 
 function App(props) {
-  const {dispatch} = useAppState();
+  const {state, dispatch} = useAppState();
 
+  
   const auth = JSON.parse(window.localStorage.getItem("auth"))
 
 
   useState(()=>{
-    
-    if (auth){
+    if (JSON.parse(window.localStorage.getItem("auth"))){
       dispatch({type: "auth", payload: auth})  
     }
-  })
+  }, [])
 
   return (
 
@@ -33,6 +34,7 @@ function App(props) {
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
+      <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} /> 
       <Route path="/dashboard" element={<Dashboard/>} />
     </Routes>
     </>

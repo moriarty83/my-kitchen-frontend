@@ -8,7 +8,9 @@ import Search from "./Search";
 
 function Ingredients(){
 
-    const {state} = useAppState()
+    const token = JSON.parse(window.localStorage.getItem("auth")).token
+
+    const {dispatch, state} = useAppState()
 
     /////////////////////
     // EDEMAM API SECTION
@@ -25,16 +27,15 @@ function Ingredients(){
     const ingredientURL = `https://api.edamam.com/auto-complete?app_id=${id}&app_key=${key}&q=${searchTerm}&limit=20`
 
     const getIngredients = ()=>{
-        console.log("getting ingredients")
         fetch(ingredientURL,{
             method: "get",
             headers: {
-                "Authorization": "Bearer " + state.token,
                 "Content-Type": "application/json"
             },
             })
             .then( response => response.json()
-                ). then( (data)=>setIngredients(data))}
+                ). then( (data)=>
+                setIngredients(data))}
     
     let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
 
@@ -49,16 +50,17 @@ function Ingredients(){
 
     // GET MYINGREDIENTS
     const getMyIngredients = ()=>{
+        console.log(state.token)
         return fetch(state.url+ "/ingredients/",{
             method: "get",
             headers: {
-                "Authorization": "Bearer " + state.token,
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
 
         })
         .then( response => response.json()
-            ). then ( data => setMyIngredients(data))}
+            ). then ( data => dispatch({type: "myIngredients", payload: data}))}
     
 
     // ADD INGREDIENT //////
@@ -80,16 +82,19 @@ function Ingredients(){
     const myIngredientsList = [];
 
     if (ingredients){
-    for(const element in myIngredients){
         
-        myIngredientsList.push(<MyIngredient key={element} name={myIngredients[element].name } ingredientID={myIngredients[element].id} />)
+    for(const element in state.myIngredients){
+        myIngredientsList.push(<MyIngredient key={element} name={state.myIngredients[element].name } ingredientID={state.myIngredients[element].id} />)
     }}
+        
+    const dispatchIngredients = ()=>{
+        dispatch({type: "myIngredients", payload: myIngredients})
+    }
 
     /////////////////////
     // USE EFFECT
     /////////////////////
     useEffect(getMyIngredients, [])
-
     /////////////////////
     // PAGE RENDER
     /////////////////////
@@ -100,6 +105,8 @@ function Ingredients(){
         {ingredinetsList}
         {myIngredientsList}
         <button onClick={addToMyIngredients}>Add Butter</button>
+        <button onClick={dispatchIngredients}>Dispatch</button>
+
         </>
     )    
 }
