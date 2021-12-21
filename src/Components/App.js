@@ -10,6 +10,7 @@ import Dashboard from '../pages/Dashboard';
 import Ingredients from './Ingredients';
 import Recipes from './Recipes';
 import ShowIngredient from '../pages/ShowIngredient';
+import ShowRecipe from '../pages/ShowRecipe';
 
 
 
@@ -18,11 +19,16 @@ function App(props) {
 
   
   const auth = JSON.parse(window.localStorage.getItem("auth"))
+  const sessionRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
 
 
   useState(()=>{
     if (JSON.parse(window.localStorage.getItem("auth"))){
       dispatch({type: "auth", payload: auth})  
+    }
+    if (JSON.parse(window.sessionStorage.getItem("recipes"))){
+      alert("Session recipes found!")
+      dispatch({type: "foundRecipes", payload: sessionRecipes})
     }
   }, [])
 
@@ -35,8 +41,8 @@ function App(props) {
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
-      <Route path="/mykitchen/recipes" element={<Recipes />} /> 
-      <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} /> 
+      <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} />
+      <Route path="/mykitchen/foundRecipes/:index" element={<ShowRecipe />} />
       <Route path="/dashboard" element={<Dashboard/>} />
     </Routes>
     </>

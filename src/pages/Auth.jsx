@@ -13,8 +13,6 @@ function Auth (props) {
     })
 
     const [userData, setUserData] = useState(null)
-
-
     const {state, dispatch} = useAppState()
 
     React.useEffect(()=>{
@@ -22,8 +20,7 @@ function Auth (props) {
             console.log(userData);
             const {token, user} = userData;
             dispatch({type: "auth", payload: { token, email: user.email}})
-            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email}))
-           
+            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email}))   
         }
     }, [userData])    
 

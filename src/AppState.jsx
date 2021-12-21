@@ -9,7 +9,8 @@ const initialState = {
     url: "http://localhost:3000",
     token: null,
     email: null,
-    myIngredients: null
+    myIngredients: null,
+    foundRecipes: null
 
 }
 
@@ -31,8 +32,10 @@ const reducer = (state, action)=>{
             return newState
             
         case "myIngredients":
-            console.log("fired my ingredients")
             newState = {...state, myIngredients: action.payload}
+            return newState
+        case "foundRecipes":
+            newState = {...state, foundRecipes: action.payload}
             return newState
         default:
             return state
@@ -56,7 +59,7 @@ export function AppState (props){
     const [state, dispatch] = useReducer(reducer, initialState)
 
     return(
-        <AppContext.Provider value={{state, dispatch}}>
+        <AppContext.Provider value={{state, dispatch, GetMyIngredients}}>
             {props.children}
         </AppContext.Provider>
     )
@@ -72,3 +75,18 @@ export const useAppState = ()=>{
     return React.useContext(AppContext)
 }
 
+/////////////////////////
+// MY INGREDIENTS
+/////////////////////////
+const GetMyIngredients = ()=>{
+    const {state, dispatch} = useAppState()
+    return fetch(state.url+ "/ingredients/",{
+        method: "get",
+        headers: {
+            "Authorization": "Bearer " + state.token,
+            "Content-Type": "application/json"
+        },
+
+    })
+    .then( response => response.json()
+        ). then ( data => dispatch({type: "myIngredients", payload: data}))}

@@ -6,8 +6,6 @@ function MyIngredient (props){
 
     const {dispatch, state } = useAppState();
 
-    
-
     // DELETE INGREDIENT //////
     const deleteMyIngredient = ()=>{
         console.log("Delete route")
