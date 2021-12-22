@@ -38,7 +38,11 @@ function Ingredients(){
                 ). then( (data)=>
                 setIngredients(data))}
     
-    let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
+    let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{
+        return<>
+        <p key={index}>{ing}</p>
+        <button onClick={()=>{addToMyIngredients(ing)}}>Add to MyIngredients</button>
+        </>}) : "Loading...";
 
     useEffect(getIngredients, [searchTerm])
 
@@ -65,14 +69,15 @@ function Ingredients(){
     
 
     // ADD INGREDIENT //////
-    const addToMyIngredients = ()=>{
+    const addToMyIngredients = (ingredient)=>{
+        console.log(ingredient)
         return fetch(state.url+ "/ingredients/",{
             method: "post",
             headers: {
                 "Authorization": "Bearer " + state.token,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({name: "unsalted butter"})
+            body: JSON.stringify({name: ingredient})
         })
         .then( response => response.json()
             )}

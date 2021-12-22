@@ -27,7 +27,6 @@ function App(props) {
       dispatch({type: "auth", payload: auth})  
     }
     if (JSON.parse(window.sessionStorage.getItem("recipes"))){
-      alert("Session recipes found!")
       dispatch({type: "foundRecipes", payload: sessionRecipes})
     }
   }, [])
@@ -42,7 +41,7 @@ function App(props) {
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
       <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} />
-      <Route path="/mykitchen/foundRecipes/:index" element={<ShowRecipe />} />
+      <Route path="/foundRecipes/:index" element={<ShowRecipe />} />
       <Route path="/dashboard" element={<Dashboard/>} />
     </Routes>
     </>

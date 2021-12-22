@@ -32,12 +32,18 @@ function Recipes () {
                 ). then( (data)=> dispatch({type: "foundRecipes", payload: data.hits}))}
     
     // let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
+    
     /////////////////////
-    // WORKER FUNTIONS
+    // FUNTIONS
     /////////////////////
     const compareIngredients = (ingredient)=>{
         if (!state.myIngredients){return}
         state.myIngredients.includes(x => x.name === ingredient)
+    }
+
+    const viewRecipe = (index)=>{
+        dispatch({type: "recipe", payload: state.foundRecipes[index]} )
+        return
     }
 
 
@@ -54,11 +60,10 @@ function Recipes () {
                 <div key={index} className="recipe-element">
                     <h1>{element.recipe.label}</h1>
                     <img src={element.recipe.image} alt = {element.recipe.label + "image"} />
-                    <button><Link to={"/mykitchen/foundRecipes/" + index}>View Recipe</Link></button>
+                    <button onClick={()=>{viewRecipe(index)}}>View Recipe</button>
                 </div>
             )
         })
-        console.log( recipeElements )
         return recipeElements
     }
 

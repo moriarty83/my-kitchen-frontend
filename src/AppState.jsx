@@ -10,7 +10,8 @@ const initialState = {
     token: null,
     email: null,
     myIngredients: null,
-    foundRecipes: null
+    foundRecipes: null,
+    recipe: null,
 
 }
 
@@ -36,6 +37,9 @@ const reducer = (state, action)=>{
             return newState
         case "foundRecipes":
             newState = {...state, foundRecipes: action.payload}
+            return newState
+        case "recipe":
+            newState = {...state, recipe: action.payload}
             return newState
         default:
             return state

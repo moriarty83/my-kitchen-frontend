@@ -9,6 +9,7 @@ function MyIngredient (props){
     // DELETE INGREDIENT //////
     const deleteMyIngredient = ()=>{
         console.log("Delete route")
+        console.log(props.ingredientID)
         return fetch(state.url+ "/user_ingredients/"+props.ingredientID,{
             method: "delete",
             headers: {

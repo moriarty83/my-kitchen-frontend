@@ -11,9 +11,18 @@ function ShowRecipe (props){
     // FUNCTIONS
     /////////////////////
 
-    const addRecipe = () =>{
-        
-    }
+    // ADD Recipe //////
+    const addToMyRecipes = ()=>{
+        return fetch(state.url+ "/recipes/",{
+            method: "post",
+            headers: {
+                "Authorization": "Bearer " + state.token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(recipe)
+        })
+        .then( response => response.json()
+            )}
 
 
     const recipe = JSON.parse(window.sessionStorage.getItem("recipes"))[params.index];
@@ -34,7 +43,8 @@ function ShowRecipe (props){
             <h4>Calories: {recipe.recipe.calories}</h4>
             <h2>Ingredients</h2>
             {recipe.recipe.ingredientLines.map((element, index)=>{return(<p key={index}>{element}</p>)})}
-            <h3>View Full Recipe on <Link to={recipe.recipe.url} >{recipe.recipe.source}</Link></h3>
+            <h3>View Full Recipe on <a href={recipe.recipe.url} >{recipe.recipe.source}</a></h3>
+            
             </div>
         )
     }
