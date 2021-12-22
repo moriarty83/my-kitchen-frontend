@@ -80,7 +80,7 @@ function Ingredients(){
             body: JSON.stringify({name: ingredient})
         })
         .then( response => response.json()
-            )}
+            ).then(getMyIngredients)}
 
     /////////////////////
     // FUNCTIONS
@@ -90,7 +90,7 @@ function Ingredients(){
     if (ingredients){
         
     for(const element in state.myIngredients){
-        myIngredientsList.push(<MyIngredient key={element} name={state.myIngredients[element].name } ingredientID={state.myIngredients[element].id} />)
+        myIngredientsList.push(<MyIngredient key={element} ingredient={state.myIngredients[element] }  />)
     }}
         
     const dispatchIngredients = ()=>{
@@ -110,9 +110,6 @@ function Ingredients(){
         <Search setSearchTerm={setSearchTerm}/>
         {ingredinetsList}
         {myIngredientsList}
-        <button onClick={addToMyIngredients}>Add Butter</button>
-        <button onClick={dispatchIngredients}>Dispatch</button>
-
         </>
     )    
 }

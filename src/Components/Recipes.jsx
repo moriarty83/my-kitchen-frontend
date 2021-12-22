@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAppState } from "../AppState"
 
@@ -7,6 +7,8 @@ import Search from "./Search";
 
 function Recipes () {
     const {dispatch, state} = useAppState();
+
+    let navigate = useNavigate();
 
     /////////////////////
     // EDEMAM API SECTION
@@ -42,8 +44,10 @@ function Recipes () {
     }
 
     const viewRecipe = (index)=>{
-        dispatch({type: "recipe", payload: state.foundRecipes[index]} )
-        return
+        
+        dispatch({type: "recipe", payload: state.foundRecipes[index].recipe})
+        window.sessionStorage.setItem("recipe", JSON.stringify(state.foundRecipes[index].recipe))
+        navigate("/foundRecipes/recipe")
     }
 
 

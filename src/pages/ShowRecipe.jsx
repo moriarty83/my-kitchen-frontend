@@ -11,7 +11,7 @@ function ShowRecipe (props){
     // FUNCTIONS
     /////////////////////
 
-    // ADD Recipe //////
+    // ADD TO MY RECIPES
     const addToMyRecipes = ()=>{
         return fetch(state.url+ "/recipes/",{
             method: "post",
@@ -19,13 +19,13 @@ function ShowRecipe (props){
                 "Authorization": "Bearer " + state.token,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(recipe)
+            body: {name: recipe.label, json: JSON.stringify(recipe)}
         })
         .then( response => response.json()
             )}
 
 
-    const recipe = JSON.parse(window.sessionStorage.getItem("recipes"))[params.index];
+    const recipe = state.recipe ? state.recipe : JSON.parse(window.sessionStorage.getItem("recipe"));
 
     const loading = ()=>{
         return (
@@ -36,14 +36,15 @@ function ShowRecipe (props){
     const loaded = ()=>{
         return(
             <div className="show-recipe">
-            <h1>{recipe.recipe.label}</h1>
-            <img src={recipe.recipe.image} alt={recipe.recipe.label + "image"} />
-            <h4>Serves: {recipe.recipe.yield}</h4>
-            <h4>Time: {recipe.recipe.totalTime}</h4>
-            <h4>Calories: {recipe.recipe.calories}</h4>
+            <h1>{recipe.label}</h1>
+            <img src={recipe.image} alt={recipe.label + "image"} />
+            <h4>Serves: {recipe.yield}</h4>
+            <h4>Time: {recipe.totalTime}</h4>
+            <h4>Calories: {recipe.calories}</h4>
             <h2>Ingredients</h2>
-            {recipe.recipe.ingredientLines.map((element, index)=>{return(<p key={index}>{element}</p>)})}
-            <h3>View Full Recipe on <a href={recipe.recipe.url} >{recipe.recipe.source}</a></h3>
+            {recipe.ingredientLines.map((element, index)=>{return(<p key={index}>{element}</p>)})}
+            <button onClick={addToMyRecipes}>Save to My Recipes</button>
+            <h3>View Full Recipe on <a href={recipe.url} target="_blank">{recipe.source}</a></h3>
             
             </div>
         )
