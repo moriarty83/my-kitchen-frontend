@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { useAppState } from "../AppState"
+import { useAppState } from "../../AppState";
 
-import Search from "./Search";
+import Search from "../Search";
 
-function Recipes () {
+function RecipeSearch ({viewRecipe}) {
     const {dispatch, state} = useAppState();
 
-    let navigate = useNavigate();
+
 
     /////////////////////
     // EDEMAM API SECTION
@@ -24,7 +24,7 @@ function Recipes () {
     // URL For API Request
     const recipeURL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${id}&app_key=${key}&q=${searchTerm}`
 
-    const getRecipes = ()=>{
+    const searchRecipes = ()=>{
         fetch(recipeURL,{
             method: "get",
             headers: {
@@ -43,13 +43,6 @@ function Recipes () {
         state.myIngredients.includes(x => x.name === ingredient)
     }
 
-    const viewRecipe = (index)=>{
-        
-        dispatch({type: "recipe", payload: state.foundRecipes[index].recipe})
-        window.sessionStorage.setItem("recipe", JSON.stringify(state.foundRecipes[index].recipe))
-        navigate("/foundRecipes/recipe")
-    }
-
 
     const loading = () =>{
         return(
@@ -64,7 +57,7 @@ function Recipes () {
                 <div key={index} className="recipe-element">
                     <h1>{element.recipe.label}</h1>
                     <img src={element.recipe.image} alt = {element.recipe.label + "image"} />
-                    <button onClick={()=>{viewRecipe(index)}}>View Recipe</button>
+                    <button onClick={()=>{viewRecipe(element.recipe)}}>View Recipe</button>
                 </div>
             )
         })
@@ -74,7 +67,7 @@ function Recipes () {
     /////////////////////
     // USE EFFECT
     /////////////////////
-    useEffect(()=>{if(searchTerm){getRecipes()}}, [searchTerm])
+    useEffect(()=>{if(searchTerm){searchRecipes()}}, [searchTerm])
 
     /////////////////////
     // RETURN
@@ -82,10 +75,10 @@ function Recipes () {
     return(
         <>
             <h1>Recipes</h1>
-            <Search setSearchTerm={setSearchTerm}/>
+            <Search setSearchTerm={setSearchTerm} />
             { state.foundRecipes ? loaded() : loading() }
         </>
     )
 }
 
-export default Recipes
+export default RecipeSearch

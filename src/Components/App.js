@@ -7,8 +7,8 @@ import Nav from './Nav';
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard';
-import Ingredients from './Ingredients';
-import Recipes from './Recipes';
+import Ingredients from './Ingredients/Ingredients';
+import Recipes from './Recipes/RecipeSearch';
 import ShowIngredient from '../pages/ShowIngredient';
 import ShowRecipe from '../pages/ShowRecipe';
 
@@ -41,7 +41,7 @@ function App(props) {
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
       <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} />
-      <Route path="/foundRecipes/:index" element={<ShowRecipe />} />
+      <Route path="/foundRecipes/recipe" element={<ShowRecipe />} />
       <Route path="/dashboard" element={<Dashboard/>} />
     </Routes>
     </>

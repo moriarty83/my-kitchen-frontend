@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useParams, Link } from "react-router-dom";
 import { useAppState } from "../AppState";
+import { checkIngredients } from "../AppState";
 
 function ShowRecipe (props){
     const {state} = useAppState()
@@ -13,20 +14,38 @@ function ShowRecipe (props){
 
     // ADD TO MY RECIPES
     const addToMyRecipes = ()=>{
+        console.log(recipe.label)
+        const recipeJson = JSON.stringify(recipe)
         return fetch(state.url+ "/recipes/",{
             method: "post",
             headers: {
                 "Authorization": "Bearer " + state.token,
                 "Content-Type": "application/json"
             },
-            body: {name: recipe.label, json: JSON.stringify(recipe)}
+            body: JSON.stringify({name: recipe.label, json: recipeJson})
         })
         .then( response => response.json()
             )}
 
-
     const recipe = state.recipe ? state.recipe : JSON.parse(window.sessionStorage.getItem("recipe"));
 
+
+    const checkIngredients = (recipe) =>{
+        console.log("hello")
+        let count = 0;
+        for(let i in recipe.ingredients){
+            console.log(recipe.ingredients[i]["foodId"])
+            if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
+                console.log("ingredient match")
+                count += 1
+            }
+        }
+        return count
+    }
+
+    //////////////////////
+    // LOADING/LOADED
+    /////////////////////
     const loading = ()=>{
         return (
             <h1>Recipe Cannot be Found</h1>
@@ -34,9 +53,12 @@ function ShowRecipe (props){
     }
 
     const loaded = ()=>{
+        const inStock = checkIngredients(recipe)
+
         return(
             <div className="show-recipe">
             <h1>{recipe.label}</h1>
+            <h2>You have {inStock} items in stock.</h2>
             <img src={recipe.image} alt={recipe.label + "image"} />
             <h4>Serves: {recipe.yield}</h4>
             <h4>Time: {recipe.totalTime}</h4>
@@ -50,6 +72,9 @@ function ShowRecipe (props){
         )
     }
    
+    //////////////////////
+    // RETURN
+    /////////////////////
     return (
         <>
         <h1>Show Recipe</h1>

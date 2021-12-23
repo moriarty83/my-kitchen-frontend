@@ -10,6 +10,7 @@ const initialState = {
     token: null,
     email: null,
     myIngredients: null,
+    myRecipes: null,
     foundRecipes: null,
     recipe: null,
 
@@ -31,12 +32,18 @@ const reducer = (state, action)=>{
             newState = {...state, token: null, email: null}
             window.localStorage.removeItem("auth")
             return newState
-            
         case "myIngredients":
             newState = {...state, myIngredients: action.payload}
             return newState
         case "foundRecipes":
             newState = {...state, foundRecipes: action.payload}
+            return newState
+        case "myRecipes":
+            let recipes = action.payload.map((element)=>{return JSON.parse(element.json)})
+            newState = {...state, myRecipes: recipes}
+            return newState
+        case "addIngredient":
+            newState = {...state, myIngredients: [...state.myIngredients, action.payload]}
             return newState
         case "recipe":
             newState = {...state, recipe: action.payload}
@@ -94,3 +101,21 @@ const GetMyIngredients = ()=>{
     })
     .then( response => response.json()
         ). then ( data => dispatch({type: "myIngredients", payload: data}))}
+
+
+/////////////////////////
+// CHECK INGREDIENTS
+/////////////////////////
+
+export const checkIngredients = (recipe, state) =>{
+    console.log("hello")
+    let count = 0;
+    for(let ingredient in recipe.ingredients){
+        console.log(ingredient)
+        if (state.myIngredients.includes(ingredient.food)){
+            console.log("ingredient match")
+            count += 1
+        }
+    }
+    return count
+}

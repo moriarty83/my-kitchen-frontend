@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAppState } from "../AppState"
+import { useEffect } from "react/cjs/react.development";
+import { useAppState } from "../../AppState";
 
 function MyIngredient ({ingredient}){
+    
+    const token = JSON.parse(window.localStorage.getItem("auth")).token
 
     const {dispatch, state } = useAppState();
 
@@ -13,12 +16,13 @@ function MyIngredient ({ingredient}){
             method: "delete",
             headers: {
                 "Authorization": "Bearer " + state.token,
-                "Content-Type": "application/json"
-            },
+            }
             
         })
         .then( response => response.json()
             )}
+
+    
     
     return(
         <>    
