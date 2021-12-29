@@ -14,13 +14,20 @@ function MyIngredient ({ingredient}){
         console.log("Delete route")
         return fetch(state.url+ "/user_ingredients/"+ingredient.id,{
             method: "delete",
-            headers: {
-                "Authorization": "Bearer " + state.token,
-            }
-            
+            headers: { "Authorization": "Bearer " + state.token}
         })
-        .then( response => response.json()
-            )}
+        .then( (response) => {
+            if(response.ok){
+                response.json()
+            }
+            else{
+                throw new Error("An error of type " + response.status + " occured")
+            };
+        })
+        .then((data)=>{dispatch({type: "myIngredients", payload: data})})
+        .catch((error) => {window.alert(error)}
+        );
+    }
 
     
     

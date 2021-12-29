@@ -9,7 +9,6 @@ function MyRecipes ({viewRecipe}) {
 
     // GET MYRECIPES
     const getMyRecipes = ()=>{
-        console.log(state.token)
         return fetch(state.url+ "/recipes/",{
             method: "get",
             headers: {
@@ -19,7 +18,22 @@ function MyRecipes ({viewRecipe}) {
 
         })
         .then( response => response.json()
-            ). then ( data => dispatch({type: "myRecipes", payload: data}))}
+            )
+        .then ( data => 
+            dispatch({type: "myRecipes", payload: data})
+        )}
+
+    const handleDelete = (id) =>{    
+
+        console.log("Delete route")
+        return fetch(state.url+ "/user_recipes/"+id,{
+            method: "delete",
+            headers: {
+                "Authorization": "Bearer " + state.token
+            }
+        })
+        .then( response => response.json())
+        .then((data)=>{window.alert(data.status)})}
 
 
     useEffect(()=>{getMyRecipes()}, [])
@@ -30,14 +44,16 @@ function MyRecipes ({viewRecipe}) {
 
     const loaded = () =>{
         const elements = state.myRecipes.map((element, index)=>{
+        const recipe = JSON.parse(element.json)
         return(        
-            <div key={index} className="recipe-element">
-                <h1>{element.label}</h1>
-                <img src={element.image} alt = {element.label + "image"} />
+            <div key={index} className="recipe-element" id={element.id}>
+                <h1>{element.name} {element.id}</h1>
+                <img src={recipe.image} alt = {element.name + "image"} />
                 <button onClick={()=>{viewRecipe(element)}}>View Recipe</button>
+                <button onClick={()=>{handleDelete(element.id)}}>Delete</button>
             </div>)
         })
-        return elements
+        return(elements)
     }
 
     return(

@@ -9,6 +9,7 @@ const initialState = {
     url: "http://localhost:3000",
     token: null,
     email: null,
+    nickname: null,
     myIngredients: null,
     myRecipes: null,
     foundRecipes: null,
@@ -27,10 +28,10 @@ const reducer = (state, action)=>{
         case  "auth":
             newState = {...state, ...action.payload}
             return newState
-
         case "logout":
             newState = {...state, token: null, email: null}
             window.localStorage.removeItem("auth")
+            window.sessionStorage.removeItem("recipe")
             return newState
         case "myIngredients":
             newState = {...state, myIngredients: action.payload}
@@ -39,14 +40,19 @@ const reducer = (state, action)=>{
             newState = {...state, foundRecipes: action.payload}
             return newState
         case "myRecipes":
-            let recipes = action.payload.map((element)=>{return JSON.parse(element.json)})
+            let recipes = action.payload
             newState = {...state, myRecipes: recipes}
             return newState
         case "addIngredient":
             newState = {...state, myIngredients: [...state.myIngredients, action.payload]}
             return newState
         case "recipe":
+            window.alert(action.payload)
             newState = {...state, recipe: action.payload}
+            return newState
+        case "addRecipe":
+            window.alert("addRecipe dispatch")
+            newState = {...state, myRecipes: [...state.myIngredients, action.payload]}
             return newState
         default:
             return state
@@ -91,7 +97,7 @@ export const useAppState = ()=>{
 /////////////////////////
 const GetMyIngredients = ()=>{
     const {state, dispatch} = useAppState()
-    return fetch(state.url+ "/ingredients/",{
+    return fetch(state.url+ "/ingredients",{
         method: "get",
         headers: {
             "Authorization": "Bearer " + state.token,

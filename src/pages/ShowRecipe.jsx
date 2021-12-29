@@ -4,7 +4,7 @@ import { useAppState } from "../AppState";
 import { checkIngredients } from "../AppState";
 
 function ShowRecipe (props){
-    const {state} = useAppState()
+    const {state, dispatch} = useAppState()
     const params = useParams();
     
 
@@ -16,7 +16,7 @@ function ShowRecipe (props){
     const addToMyRecipes = ()=>{
         console.log(recipe.label)
         const recipeJson = JSON.stringify(recipe)
-        return fetch(state.url+ "/recipes/",{
+        fetch(state.url+ "/recipes/",{
             method: "post",
             headers: {
                 "Authorization": "Bearer " + state.token,
@@ -24,8 +24,20 @@ function ShowRecipe (props){
             },
             body: JSON.stringify({name: recipe.label, json: recipeJson})
         })
-        .then( response => response.json()
-            )}
+        .then( (response) => {
+            alert(response)
+            if (response.ok){
+                window.alert("ok")
+                return response.json()}
+            else {
+                throw new Error("An error of type " + response.status + " occured")
+            }
+            })
+        .then((data)=>{
+            window.alert("adding")
+            dispatch({type:"myRecipes", payload: data})
+        })
+        .catch((error) => { window.alert(error)})}
 
     const recipe = state.recipe ? state.recipe : JSON.parse(window.sessionStorage.getItem("recipe"));
 

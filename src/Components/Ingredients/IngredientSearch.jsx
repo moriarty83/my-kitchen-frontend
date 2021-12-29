@@ -34,6 +34,8 @@ function IngredientSearch (props){
                 ). then( (data)=>
                 setFoundIngredients(data))}
     
+
+    
     let foundIngredientsList = foundIngredients ? foundIngredients.map((ing, index)=>{
         return<div key={index}>
         <p>{ing}</p>
@@ -49,7 +51,7 @@ function IngredientSearch (props){
     // ADD INGREDIENT
     const addToMyIngredients = (ingredient)=>{
         console.log(ingredient)
-        return fetch(state.url+ "/ingredients/",{
+        fetch(state.url+ "/ingredients/",{
             method: "post",
             headers: {
                 "Authorization": "Bearer " + state.token,
@@ -57,8 +59,30 @@ function IngredientSearch (props){
             },
             body: JSON.stringify({name: ingredient})
         })
-        .then( response => response.json()
-            ).then((data)=>{dispatch({type:"addIngredient", payload: data})})}
+        // Error Handler
+        .then((response)=>{
+            if(response.ok){
+                return response.json()
+            }
+            else{
+                if (response.status === 422){
+                throw new Error("Could not add Ingredient. You may already have added this Ingredient")}
+                else{
+                    throw new Error("An error of type " + response.status + " occured")
+                };
+            }
+        })
+        // If no error, add to state.myIngredients.
+        .then((responseJson) => {
+            dispatch({type:"addIngredient", payload: responseJson})
+          })
+          .catch((error) => {
+            window.alert(error)
+          });
+    
+    }
+
+
     /////////////////////
     // USE EFFECT
     /////////////////////

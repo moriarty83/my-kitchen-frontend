@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import {useParams, Navigate } from "react-router-dom"
+import {useParams, useNavigate, Navigate } from "react-router-dom"
 import { useAppState } from "../AppState"
 
 function Auth (props) {
 
     const params = useParams()
     const type = params.form
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -18,9 +19,10 @@ function Auth (props) {
     React.useEffect(()=>{
         if (userData){
             console.log(userData);
-            const {token, user} = userData;
-            dispatch({type: "auth", payload: { token, email: user.email}})
-            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email}))   
+            console.log(Date.now())
+            const {token, user, exp} = userData;
+            dispatch({type: "auth", payload: { token, email: user.email, exp}})
+            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, exp: exp}))   
         }
     }, [userData])    
 
@@ -45,7 +47,17 @@ function Auth (props) {
                 },
                 body: JSON.stringify(formData)
             })
-            .then( response => response.json())
+            .then( response => {
+                console.log(response)
+                if(response.ok){
+                    console.log("okay")
+                    return response.json()}
+                else{
+                    throw new Error("Invalid Username/Password")
+                }}
+                )
+            .then(data => data)
+            .catch(error=> alert(error))
             
         }
         
@@ -60,7 +72,8 @@ function Auth (props) {
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        actions[type]().then((data) => {setUserData(data)});
+        actions[type]().then((data) => {setUserData(data)
+        });
     }
 
 
@@ -68,8 +81,12 @@ function Auth (props) {
         <div>
             { userData ? <Navigate to="/dashboard" replace={true} /> : ""}
             <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email</label>
                 <input type="email" name="email" onChange={handleChange}/>
+                <label htmlFor="password">Password</label>
                 <input type="password" name="password" onChange={handleChange}/>
+                <label htmlFor="nickname">Nickname</label>
+                <input type="text" name="nickname" onChange={handleChange}/>
                 <input type="submit" value={type} />
             </form>
         </div>

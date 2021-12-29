@@ -11,6 +11,8 @@ import Ingredients from './Ingredients/Ingredients';
 import Recipes from './Recipes/RecipeSearch';
 import ShowIngredient from '../pages/ShowIngredient';
 import ShowRecipe from '../pages/ShowRecipe';
+import Profile from '../pages/Profile';
+import Delete from './User/Delete';
 
 
 
@@ -24,7 +26,14 @@ function App(props) {
 
   useState(()=>{
     if (JSON.parse(window.localStorage.getItem("auth"))){
-      dispatch({type: "auth", payload: auth})  
+      // IF EXPIRATIN TIME NOT MET
+      if(Date.now()<auth.exp*1000){
+        dispatch({type: "auth", payload: auth})
+      }
+      else{
+        dispatch({type: "logout"})
+      }
+        
     }
     if (JSON.parse(window.sessionStorage.getItem("recipes"))){
       dispatch({type: "foundRecipes", payload: sessionRecipes})
@@ -41,8 +50,11 @@ function App(props) {
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
       <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} />
+      <Route path="/mykitchen/account" element={<Profile />} />
+      <Route path="/mykitchen/delete/:id" element={<Delete />} />
       <Route path="/foundRecipes/recipe" element={<ShowRecipe />} />
       <Route path="/dashboard" element={<Dashboard/>} />
+
     </Routes>
     </>
 
