@@ -32,10 +32,11 @@ function MyRecipes ({viewRecipe}) {
                 "Authorization": "Bearer " + state.token
             }
         })
-        .then( response => response.json())
-        .then((data)=>{window.alert(data.status)})}
-
-
+        .then( (response) => {if(response.ok) {response.json()}
+            else{throw new Error("An error of type " + response.status + " occured")}})
+        .then((data)=>{dispatch({type: "myRecipes", payload: data})})
+        .catch((error) => {window.alert(error)})
+        }
     useEffect(()=>{getMyRecipes()}, [])
 
     const loading = ()=>{

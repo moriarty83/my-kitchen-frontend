@@ -14,7 +14,7 @@ function Nav (props){
     }
     return(
         <header>
-            <h1>My Kitchen</h1>
+            <h1 className="text-3xl font-bold underline">My Kitchen</h1>
             
             <nav>
                 <Link to="/"><div>Home</div></Link>
