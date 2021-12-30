@@ -16,7 +16,7 @@ function MyIngredients(props){
     if (state.myIngredients){
         
     for(const element in state.myIngredients){
-        myIngredientsList.push(<MyIngredient key={element} ingredient={state.myIngredients[element] }  />)
+        myIngredientsList.push(<MyIngredient key={element} ingredient={state.myIngredients[element]}  />)
     }}
         
 

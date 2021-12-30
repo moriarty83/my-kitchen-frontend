@@ -4,7 +4,7 @@ import { useAppState } from "../../AppState";
 import Search from "../Search";
 
 function IngredientSearch (props){
-    const token = JSON.parse(window.localStorage.getItem("auth")).token
+    // const token = JSON.parse(window.localStorage.getItem("auth")).token
 
     const {dispatch, state} = useAppState()
 
@@ -74,7 +74,7 @@ function IngredientSearch (props){
         })
         // If no error, add to state.myIngredients.
         .then((responseJson) => {
-            dispatch({type:"addIngredient", payload: responseJson})
+            dispatch({type:"myIngredients", payload: responseJson})
           })
           .catch((error) => {
             window.alert(error)

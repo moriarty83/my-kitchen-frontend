@@ -15,7 +15,6 @@ function MyRecipes ({viewRecipe}) {
                 "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
-
         })
         .then( response => response.json()
             )
@@ -32,7 +31,7 @@ function MyRecipes ({viewRecipe}) {
                 "Authorization": "Bearer " + state.token
             }
         })
-        .then( (response) => {if(response.ok) {response.json()}
+        .then( (response) => {if(response.ok) {return response.json()}
             else{throw new Error("An error of type " + response.status + " occured")}})
         .then((data)=>{dispatch({type: "myRecipes", payload: data})})
         .catch((error) => {window.alert(error)})

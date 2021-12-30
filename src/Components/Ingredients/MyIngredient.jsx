@@ -10,21 +10,22 @@ function MyIngredient ({ingredient}){
     const {dispatch, state } = useAppState();
 
     // DELETE INGREDIENT //////
-    const deleteMyIngredient = ()=>{
+    const deleteMyIngredient = (id)=>{
         console.log("Delete route")
-        return fetch(state.url+ "/user_ingredients/"+ingredient.id,{
+        return fetch(state.url+ "/user_ingredients/"+id,{
             method: "delete",
             headers: { "Authorization": "Bearer " + state.token}
         })
         .then( (response) => {
             if(response.ok){
-                response.json()
+                return response.json()
             }
             else{
                 throw new Error("An error of type " + response.status + " occured")
             };
         })
-        .then((data)=>{dispatch({type: "myIngredients", payload: data})})
+        .then((data)=>{window.alert("Data" + data) 
+            dispatch({type: "myIngredients", payload: data})})
         .catch((error) => {window.alert(error)}
         );
     }
@@ -36,8 +37,8 @@ function MyIngredient ({ingredient}){
             <div className="my-ingredient">
                 <h3>{ingredient.name}</h3>
                 <img src= {ingredient.image_url} alt={ingredient.name + " image"} />
-                <button><Link to={"/mykitchen/ingredients/" + ingredient.name}>Details</Link></button>
-                <button onClick={deleteMyIngredient}>Delete</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/" + ingredient.name}>Details</Link></button>
+                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"onClick={()=>{deleteMyIngredient(ingredient.id)}}>Delete</button>
             </div>
         </>
 

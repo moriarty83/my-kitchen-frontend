@@ -27,7 +27,6 @@ function ShowRecipe (props){
         .then( (response) => {
             alert(response)
             if (response.ok){
-                window.alert("ok")
                 return response.json()}
             else {
                 throw new Error("An error of type " + response.status + " occured")
