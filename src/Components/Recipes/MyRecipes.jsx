@@ -49,7 +49,7 @@ function MyRecipes ({viewRecipe}) {
             <div key={index} className="recipe-element" id={element.id}>
                 <h1>{element.name} {element.id}</h1>
                 <img src={recipe.image} alt = {element.name + "image"} />
-                <button onClick={()=>{viewRecipe(element)}}>View Recipe</button>
+                <button onClick={()=>{viewRecipe(recipe)}}>View Recipe</button>
                 <button onClick={()=>{handleDelete(element.id)}}>Delete</button>
             </div>)
         })

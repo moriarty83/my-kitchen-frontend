@@ -34,7 +34,7 @@ function MyIngredient ({ingredient}){
     
     return(
         <>    
-            <div className="my-ingredient">
+            <div className="flex-column">
                 <h3>{ingredient.name}</h3>
                 <img src= {ingredient.image_url} alt={ingredient.name + " image"} />
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/" + ingredient.name}>Details</Link></button>

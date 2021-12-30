@@ -26,10 +26,10 @@ function Ingredients(props){
 
     useEffect(()=>{getMyIngredients()}, [])
     return(
-    <>
+    <div className="flex flex-row">
         <MyIngredients getMyIngredinets={getMyIngredients} />
         <IngredientSearch getMyIngredinets={getMyIngredients} />
-    </>)
+    </div>)
 }
 
 export default Ingredients

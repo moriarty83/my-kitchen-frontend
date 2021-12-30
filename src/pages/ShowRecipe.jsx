@@ -64,12 +64,12 @@ function ShowRecipe (props){
     }
 
     const loaded = ()=>{
-        const inStock = checkIngredients(recipe)
+        // const inStock = checkIngredients(recipe)
 
         return(
             <div className="show-recipe">
             <h1>{recipe.label}</h1>
-            <h2>You have {inStock} items in stock.</h2>
+            {/* <h2>You have {inStock} items in stock.</h2> */}
             <img src={recipe.image} alt={recipe.label + "image"} />
             <h4>Serves: {recipe.yield}</h4>
             <h4>Time: {recipe.totalTime}</h4>

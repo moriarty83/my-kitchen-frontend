@@ -27,8 +27,14 @@ function Dashboard (props) {
     return(
         <>
             <h1>Dashboard</h1>
-            <Ingredients />
-            <Recipes checkIngredients={checkIngredients}/>
+            <div className="flex">
+                <div className="border-solid border-2 border-indigo-600 m-4">
+                    <Ingredients />
+                </div>
+                <div>
+                    <Recipes checkIngredients={checkIngredients}/>
+                </div>
+            </div>
         </>
     )
 }

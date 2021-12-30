@@ -5,7 +5,9 @@ import { useAppState } from "../../AppState";
 
 import Search from "../Search";
 
-function RecipeSearch ({viewRecipe}) {
+import Recipe from "./Recipe";
+
+function RecipeSearch ({viewRecipe, listIngredients}) {
     const {dispatch, state} = useAppState();
 
 
@@ -43,6 +45,18 @@ function RecipeSearch ({viewRecipe}) {
         state.myIngredients.includes(x => x.name === ingredient)
     }
 
+    const checkIngredients = (recipe) =>{
+        console.log("hello")
+        let count = 0;
+        for(let i in recipe.ingredients){
+            if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
+                console.log("ingredient match")
+                count += 1
+            }
+        }
+        return count
+    }
+
 
     const loading = () =>{
         return(
@@ -52,22 +66,11 @@ function RecipeSearch ({viewRecipe}) {
 
     const loaded = ()=>{
         window.sessionStorage.setItem("recipes", JSON.stringify(state.foundRecipes))
+        
         const recipeElements = state.foundRecipes.map((element, index)=>{
-            return(<>
-                <div key={index} className="recipe-element">
-                    <h1>{element.recipe.label}</h1>
-                    <img src={element.recipe.image} alt = {element.recipe.label + "image"} />
-                    <button onClick={()=>{viewRecipe(element.recipe)}}>View Recipe</button>
-                </div>
-                <div id="whoobe-3fery" class="w-full md:w-64 justify-center items-center bg-white shadow-lg rounded-lg flex flex-col">
-                <img src="https://res.cloudinary.com/moodgiver/image/upload/v1633344243/adventure_woman_rujic1.webp" alt="img" title="img" class="w-full h-auto object-cover rounded-t-lg" id="whoobe-ixxe5" />
-                    <div id="whoobe-1okdg" class="w-full p-4 justify-start flex flex-col">
-                        <h4 class="border-b-2 text-3xl" id="whoobe-3mr7n">Info Card</h4>
-                        <p class="my-4" id="whoobe-950fw">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac tortor dignissim convallis aenean. Imperdiet massa tincidunt nunc pulvinar.</p>
-                        <button value="button" class="my-4 px-4 py-2 text-white hover:bg-blue-700 bg-blue-500" id="whoobe-jkkr2">Read more</button>
-                    </div>
-            </div>
-            </>
+
+            return(<Recipe key={index} recipe={element.recipe} />
+
             )
         })
         return recipeElements

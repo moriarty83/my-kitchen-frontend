@@ -28,10 +28,10 @@ function MyIngredients(props){
     // PAGE RENDER
     /////////////////////
     return(
-        <>
-        <h1>Ingredinets</h1>
+        <div>
+        <h1>My Ingredinets</h1>
             {myIngredientsList}
-        </>
+        </div>
     )    
 }
 
