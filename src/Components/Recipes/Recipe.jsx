@@ -40,7 +40,7 @@ function Recipe({recipe}){
                 <div id="whoobe-1okdg" className="w-full p-4 justify-start flex flex-col">
                     <h4 className="border-b-2 text-3xl" id="whoobe-3mr7n">{recipe.label}</h4>
                     <p className="my-4" id="whoobe-950fw">You have {checkIngredients()} of {recipe.ingredients.length} ingredients.</p>
-                    <button onClick={()=>{viewRecipe(recipe)}} value="button" className="my-4 px-4 py-2 text-white hover:bg-blue-700 bg-blue-500" id="whoobe-jkkr2">View Recipe</button>
+                    <button onClick={()=>{viewRecipe(recipe)}} value="button" className="my-4 px-4 py-2  text-white hover:bg-gray-700 bg-gray-800" id="whoobe-jkkr2">View Recipe</button>
                 </div>
             </div>
         

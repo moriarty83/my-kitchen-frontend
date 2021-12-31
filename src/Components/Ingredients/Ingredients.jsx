@@ -10,25 +10,12 @@ function Ingredients(props){
     const {dispatch, state} = useAppState()
 
         // GET MYINGREDIENTS
-        const getMyIngredients = ()=>{
-            console.log(state.token)
-            return fetch(state.url+ "/ingredients/",{
-                method: "get",
-                headers: {
-                    "Authorization": "Bearer " + token,
-                    "Content-Type": "application/json"
-                },
-    
-            })
-            .then( response => response.json()
-                ). then ( data => dispatch({type: "myIngredients", payload: data}))}
 
-
-    useEffect(()=>{getMyIngredients()}, [])
+    // useEffect(()=>{getMyIngredients()}, [])
     return(
     <div className="flex flex-row">
-        <MyIngredients getMyIngredinets={getMyIngredients} />
-        <IngredientSearch getMyIngredinets={getMyIngredients} />
+        {/* <MyIngredients getMyIngredinets={getMyIngredients} />
+        <IngredientSearch getMyIngredinets={getMyIngredients} /> */}
     </div>)
 }
 

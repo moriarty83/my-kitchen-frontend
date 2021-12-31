@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppState } from "../../AppState";
+import Recipe from "./Recipe";
+import Carousel from "../Carousel";
 
 function MyRecipes ({viewRecipe}) {
     const {dispatch, state} = useAppState()
@@ -43,18 +45,19 @@ function MyRecipes ({viewRecipe}) {
     }
 
     const loaded = () =>{
-        const elements = state.myRecipes.map((element, index)=>{
-        const recipe = JSON.parse(element.json)
-        return(        
-            <div key={index} className="recipe-element" id={element.id}>
-                <h1>{element.name} {element.id}</h1>
-                <img src={recipe.image} alt = {element.name + "image"} />
-                <button onClick={()=>{viewRecipe(recipe)}}>View Recipe</button>
-                <button onClick={()=>{handleDelete(element.id)}}>Delete</button>
-            </div>)
+
+        const carouselData = state.myRecipes.map((element, index)=>{
+            const recipe = JSON.parse(element.json)
+            console.log(recipe.image)
+            return( 
+                {name: element.name, image: recipe.image}
+            )
         })
-        return(elements)
-    }
+        console.log(carouselData)
+        return(<Carousel carouselData={carouselData}/>)
+        }
+    
+  
 
     return(
         <>

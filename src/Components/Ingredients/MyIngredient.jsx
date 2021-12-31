@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react/cjs/react.development";
 import { useAppState } from "../../AppState";
 
-function MyIngredient ({ingredient}){
+function MyIngredient ({name, image, id, ingredient}){
     
     const token = JSON.parse(window.localStorage.getItem("auth")).token
 
     const {dispatch, state } = useAppState();
+    
 
     // DELETE INGREDIENT //////
     const deleteMyIngredient = (id)=>{
@@ -34,11 +35,11 @@ function MyIngredient ({ingredient}){
     
     return(
         <>    
-            <div className="flex-column">
-                <h3>{ingredient.name}</h3>
-                <img src= {ingredient.image_url} alt={ingredient.name + " image"} />
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/" + ingredient.name}>Details</Link></button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"onClick={()=>{deleteMyIngredient(ingredient.id)}}>Delete</button>
+            <div className="my-ingredient">
+                <h3>{name}</h3>
+                <img src= {image} alt={name + " image"} />
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/" + name}>Details</Link></button>
+                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"onClick={()=>{deleteMyIngredient(id)}}>Delete</button>
             </div>
         </>
 

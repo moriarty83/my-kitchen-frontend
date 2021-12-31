@@ -13,6 +13,7 @@ import ShowIngredient from '../pages/ShowIngredient';
 import ShowRecipe from '../pages/ShowRecipe';
 import Profile from '../pages/Profile';
 import Delete from './User/Delete';
+import Slider from './Slider';
 
 
 

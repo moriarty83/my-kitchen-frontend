@@ -2,8 +2,9 @@ import React from "react";
 import { useEffect } from "react/cjs/react.development";
 import { useAppState } from "../AppState";
 
-import Ingredients from "../Components/Ingredients/Ingredients";
-import Recipes from "../Components/Recipes/Recipes";
+import MyIngredients from "../Components/Ingredients/MyIngredients";
+import MyRecipes from "../Components/Recipes/MyRecipes";
+import Search from "../Components/Search";
 
 function Dashboard (props) {
 
@@ -27,14 +28,20 @@ function Dashboard (props) {
     return(
         <>
             <h1>Dashboard</h1>
-            <div className="flex">
-                <div className="border-solid border-2 border-indigo-600 m-4">
-                    <Ingredients />
-                </div>
+
                 <div>
-                    <Recipes checkIngredients={checkIngredients}/>
+                    <MyRecipes />
+                    <h1>View All of My Recipes</h1>
+                    <h1>Search for New Recipes</h1>
+                    <Search />
                 </div>
-            </div>
+
+                <div>
+                    <MyIngredients />
+                    <h1>View All of My Ingredients</h1>
+                    <h1>Search for New Ingredients</h1>
+                    <Search />
+                </div>
         </>
     )
 }
