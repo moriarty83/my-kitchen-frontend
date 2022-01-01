@@ -18,39 +18,6 @@ function Nav (props){
         navigate("/")
         
     }
-    // return(
-    //     <header>
-    //         <h1 className="text-3xl font-bold underline">My Kitchen</h1>
-            
-    //         <nav>
-    //             <Link to="/"><div>Home</div></Link>
-                
-    //             {!state.token ?
-    //             <><Link to="/auth/signup"><div>Sign Up</div></Link>
-    //             <Link to="/auth/login"><div>Login</div></Link></> : <>
-    //             <div onClick={handleLogout}>Logout</div>
-    //             <Link to="/mykitchen/account"><div>Account</div></Link>
-    //             </>
-    //             }
-    //         </nav>
-    //     </header>
-    // )
-    // }
-
-
-    /* This example requires Tailwind CSS v2.0+ */
-    // const accountOrSignup = () =>{
-    //     return !state.token ? { name: 'Sign Up', href: '/auth/signup', current: false} : { name: 'Account', href: '/mykitchen/account', current: false}
-    //         { name: 'Login', href: '/auth/login', current: false}]
-    //         return object
-    //         }
-    //     else{
-    //         return(
-    //             [{ name: 'Account', href: '/mykitchen/account', current: false}, 
-    //             { name: 'Logout', href: '/auth/login', current: false})
-            
-    //     }
-    // }
 
     const navigation = [
     { name: 'Dashboard', href: '/dashboard', current: true },

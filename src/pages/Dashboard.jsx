@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect } from "react/cjs/react.development";
 import { useAppState } from "../AppState";
+import Discover from "../Components/Discover";
 
 import MyIngredients from "../Components/Ingredients/MyIngredients";
 import MyRecipes from "../Components/Recipes/MyRecipes";
 import Search from "../Components/Search";
+
 
 function Dashboard (props) {
 
@@ -26,22 +28,24 @@ function Dashboard (props) {
 
     useEffect(()=>{window.scrollTo(0, 0)}, [])
     return(
-        <>
-            <h1>Dashboard</h1>
+        <>  
+            <div className="my-8 relative z-20" >
+                <Discover/>
+            </div>
 
-                <div>
-                    <MyRecipes />
-                    <h1>View All of My Recipes</h1>
-                    <h1>Search for New Recipes</h1>
-                    <Search />
-                </div>
+            <div className="my-8 relative z-10">
+                <MyRecipes />
+                <h1>View All of My Recipes</h1>
+                <h1>Search for New Recipes</h1>
+                <Search />
+            </div>
 
-                <div>
-                    <MyIngredients />
-                    <h1>View All of My Ingredients</h1>
-                    <h1>Search for New Ingredients</h1>
-                    <Search />
-                </div>
+            <div className="my-8">
+                <MyIngredients />
+                <h1>View All of My Ingredients</h1>
+                <h1>Search for New Ingredients</h1>
+                <Search />
+            </div>
         </>
     )
 }

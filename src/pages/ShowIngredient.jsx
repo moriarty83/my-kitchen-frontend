@@ -3,17 +3,18 @@ import { useParams } from "react-router-dom";
 
 function ShowIngredient (props){
 
-    const params = useParams();
+    const params = useParams(props);
+    console.log (params.id)
     /////////////////////
     // EDEMAM API SECTION
     /////////////////////
-    const id = process.env.REACT_APP_EDEMAM_INGREDIENT_APP_ID;
+    const appId = process.env.REACT_APP_EDEMAM_INGREDIENT_APP_ID;
     const key = process.env.REACT_APP_EDEMAM_INGREDIENT_KEY;
     const [ingredient, setIngredient] = useState();
     console.log(ingredient)
 
     // URL For API Request
-    const ingredientURL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${id}&app_key=${key}&ingr=${params.ingredient}&nutrition-type=cooking`
+    const ingredientURL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${appId}&app_key=${key}&ingr=${params.id}&nutrition-type=cooking`
     console.log(ingredientURL)
     const getIngredient = ()=>{
         console.log("getting ingredients")
@@ -31,8 +32,8 @@ function ShowIngredient (props){
     const loaded = ()=>{
         return(
             <div className="ingredientDiv">
-                <h1>{ingredient.parsed[0].food.label}</h1>
-                <img src={ingredient.parsed[0].food.image} />
+                <h1>{ingredient.hints[0].food.label}</h1>
+                <img src={ingredient.hints[0].food.image} />
             </div>
         )
     }

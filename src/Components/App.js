@@ -10,6 +10,7 @@ import Dashboard from '../pages/Dashboard';
 import Ingredients from './Ingredients/Ingredients';
 import Recipes from './Recipes/RecipeSearch';
 import ShowIngredient from '../pages/ShowIngredient';
+import IngredientSearch from './Ingredients/IngredientSearch';
 import ShowRecipe from '../pages/ShowRecipe';
 import Profile from '../pages/Profile';
 import Delete from './User/Delete';
@@ -50,9 +51,11 @@ function App(props) {
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
-      <Route path="/mykitchen/ingredients/:ingredient" element={<ShowIngredient />} />
+      <Route path="/mykitchen/ingredients/:id" element={<ShowIngredient />} />
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
+      <Route path="/mykitchen/search/ingredients" element={<IngredientSearch />} /> 
+
       <Route path="/foundRecipes/recipe" element={<ShowRecipe />} />
       <Route path="/dashboard" element={<Dashboard/>} />
 

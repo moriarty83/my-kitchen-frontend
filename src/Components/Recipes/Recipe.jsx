@@ -15,7 +15,20 @@ function Recipe({recipe}){
             navigate("/foundRecipes/recipe")
         }
         
+        const handleDelete = (id) =>{    
 
+            console.log("Delete route")
+            return fetch(state.url+ "/user_recipes/"+id,{
+                method: "delete",
+                headers: {
+                    "Authorization": "Bearer " + state.token
+                }
+            })
+            .then( (response) => {if(response.ok) {return response.json()}
+                else{throw new Error("An error of type " + response.status + " occured")}})
+            .then((data)=>{dispatch({type: "myRecipes", payload: data})})
+            .catch((error) => {window.alert(error)})
+            }
 
 
         const checkIngredients = ()=>{

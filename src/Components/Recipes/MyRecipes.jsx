@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppState } from "../../AppState";
 import Recipe from "./Recipe";
-import Carousel from "../Carousel";
+import ItemSlider from "../Slider";
 
 function MyRecipes ({viewRecipe}) {
     const {dispatch, state} = useAppState()
@@ -24,38 +24,20 @@ function MyRecipes ({viewRecipe}) {
             dispatch({type: "myRecipes", payload: data})
         )}
 
-    const handleDelete = (id) =>{    
 
-        console.log("Delete route")
-        return fetch(state.url+ "/user_recipes/"+id,{
-            method: "delete",
-            headers: {
-                "Authorization": "Bearer " + state.token
-            }
-        })
-        .then( (response) => {if(response.ok) {return response.json()}
-            else{throw new Error("An error of type " + response.status + " occured")}})
-        .then((data)=>{dispatch({type: "myRecipes", payload: data})})
-        .catch((error) => {window.alert(error)})
-        }
     useEffect(()=>{getMyRecipes()}, [])
 
-    const loading = ()=>{
-        <h1>Loading...</h1>
-    }
-
-    const loaded = () =>{
-
-        const carouselData = state.myRecipes.map((element, index)=>{
+    const loading = ()=>{return <h1>Loading...</h1>}
+        
+    const loaded = ()=>{
+        
+        const items = state.myRecipes.map((element, index)=>{
             const recipe = JSON.parse(element.json)
-            console.log(recipe.image)
-            return( 
-                {name: element.name, image: recipe.image}
-            )
+            return({name: element.name, image: recipe.image, id: element.edemam_id
+            })
         })
-        console.log(carouselData)
-        return(<Carousel carouselData={carouselData}/>)
-        }
+        return <ItemSlider type="ingredient" items={items} />
+    }
     
   
 
