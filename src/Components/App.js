@@ -51,7 +51,7 @@ function App(props) {
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
-      <Route path="/mykitchen/ingredients/:id" element={<ShowIngredient />} />
+      <Route path="/mykitchen/ingredient" element={<ShowIngredient />} />
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
       <Route path="/mykitchen/search/ingredients" element={<IngredientSearch />} /> 
