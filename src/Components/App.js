@@ -14,7 +14,7 @@ import IngredientSearch from './Ingredients/IngredientSearch';
 import ShowRecipe from '../pages/ShowRecipe';
 import Profile from '../pages/Profile';
 import Delete from './User/Delete';
-import Slider from './Slider';
+import MyIngredientsIndex from './Ingredients/MyIngredientsIndex';
 
 
 
@@ -24,6 +24,7 @@ function App(props) {
   
   const auth = JSON.parse(window.localStorage.getItem("auth"))
   const sessionRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+  const token = JSON.parse(window.localStorage.getItem("auth")).token
 
 
   useState(()=>{
@@ -41,6 +42,19 @@ function App(props) {
       dispatch({type: "foundRecipes", payload: sessionRecipes})
     }
   }, [])
+
+  const getMyIngredients = ()=>{
+    console.log(state.token)
+    return fetch(state.url+ "/ingredients/",{
+        method: "get",
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+        },
+
+    })
+    .then( response => response.json()
+        ). then ( data => dispatch({type: "myIngredients", payload: data}))}
 
   // ADD INGREDIENT
   const addToMyIngredients = (ingredient)=>{
@@ -105,6 +119,8 @@ const deleteMyIngredient = (id)=>{
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
+      <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
+
       <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />

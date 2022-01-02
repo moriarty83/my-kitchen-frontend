@@ -47,9 +47,16 @@ function MyIngredients(props){
     // PAGE RENDER
     /////////////////////
     return(
-        <div>
-            <h1>My Ingredinets</h1>
+        <div className="my-8">
+            <div className="bg-gray-800 bg-opacity-75 border-t-2">
+            <h4 className="text-white underline text-3xl mx-4" id="whoobe-3mr7n">MyIngredients</h4>
+            </div>
+
             {state.myIngredients ? loaded() : loading()}
+            <div className="bg-gray-800 bg-opacity-75 border-b-2">
+            <h4 className="text-white text-right text-xl mx-4" id="whoobe-3mr7n"><a href="/mykitchen/ingredients/all">View All</a></h4>
+            </div>
+
         </div>
     )    
 }

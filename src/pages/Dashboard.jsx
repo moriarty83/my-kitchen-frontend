@@ -38,9 +38,8 @@ function Dashboard (props) {
                 <h1>View All of My Recipes</h1>
             </div>
 
-            <div className="my-8">
+            <div className="my-8 flex flex-col justify-center">
                 <MyIngredients />
-                <h1>View All of My Ingredients</h1>
             </div>
         </>
     )
