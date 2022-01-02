@@ -1,7 +1,6 @@
 import React from "react";
 import { useAppState } from "../../AppState";
 import MyRecipes from "./MyRecipes";
-import RecipeSearch from "./RecipeSearch";
 import {useNavigate} from "react-router-dom"
 
 
@@ -47,7 +46,6 @@ function Recipes () {
     return(
         <div className="flex-row">
         <MyRecipes viewRecipe={viewRecipe} checkIngredients={checkIngredients} listIngredients={listIngredients}/>
-        <RecipeSearch viewRecipe={viewRecipe} checkIngredients={checkIngredients} listIngredients={listIngredients}/>
         </div>
     )
 }

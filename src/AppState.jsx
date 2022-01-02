@@ -54,6 +54,7 @@ const reducer = (state, action)=>{
             window.alert("addRecipe dispatch")
             newState = {...state, myRecipes: [...state.myIngredients, action.payload]}
             return newState
+            
         default:
             return state
             

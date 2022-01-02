@@ -42,6 +42,60 @@ function App(props) {
     }
   }, [])
 
+  // ADD INGREDIENT
+  const addToMyIngredients = (ingredient)=>{
+    fetch(state.url+ "/ingredients/",{
+        method: "post",
+        headers: {
+            "Authorization": "Bearer " + state.token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({name: ingredient})
+    })
+    // Error Handler
+    .then((response)=>{
+        if(response.ok){
+            return response.json()
+        }
+        else{
+            if (response.status === 422){
+            throw new Error("Could not add Ingredient. You may already have added this Ingredient")}
+            else{
+                throw new Error("An error of type " + response.status + " occured")
+            };
+        }
+    })
+    // If no error, add to state.myIngredients.
+    .then((responseJson) => {
+        dispatch({type:"myIngredients", payload: responseJson})
+        window.alert(ingredient + " Has Been Successfully Added")
+      })
+      .catch((error) => {
+        window.alert(error)
+      });
+}
+
+// DELETE INGREDIENT //////
+const deleteMyIngredient = (id)=>{
+  console.log("Delete route")
+  return fetch(state.url+ "/user_ingredients/"+id,{
+      method: "delete",
+      headers: { "Authorization": "Bearer " + state.token}
+  })
+  .then( (response) => {
+      if(response.ok){
+          return response.json()
+      }
+      else{
+          throw new Error("An error of type " + response.status + " occured")
+      };
+  })
+  .then((data)=>{window.alert("Data" + data) 
+      dispatch({type: "myIngredients", payload: data})})
+  .catch((error) => {window.alert(error)}
+  );
+}
+
   return (
 
     <>
@@ -51,10 +105,10 @@ function App(props) {
       <Route exact path="/" element={<Home/>} />}
       <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
-      <Route path="/mykitchen/ingredient" element={<ShowIngredient />} />
+      <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
-      <Route path="/mykitchen/search/ingredients" element={<IngredientSearch />} /> 
+      <Route path="/mykitchen/search/ingredients" element={<IngredientSearch addToMyIngredients={addToMyIngredients} />} /> 
 
       <Route path="/foundRecipes/recipe" element={<ShowRecipe />} />
       <Route path="/dashboard" element={<Dashboard/>} />

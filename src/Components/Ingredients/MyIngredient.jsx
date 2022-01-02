@@ -38,7 +38,7 @@ function MyIngredient ({name, image, id, ingredient}){
             <div className="my-ingredient">
                 <h3>{name}</h3>
                 <img src= {image} alt={name + " image"} />
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/" + name}>Details</Link></button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/" + ingredient.name}>Details</Link></button>
                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"onClick={()=>{deleteMyIngredient(id)}}>Delete</button>
             </div>
         </>

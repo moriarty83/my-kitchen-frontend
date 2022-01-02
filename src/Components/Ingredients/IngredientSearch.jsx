@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import Search from "../Search";
 
-function IngredientSearch (props){
+function IngredientSearch ({addToMyIngredients}){
 
     const queryParams = new URLSearchParams(window.location.search)
     const query = queryParams.get("query")
@@ -80,7 +80,7 @@ function IngredientSearch (props){
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredient?query="+ing.replace(" ", "%20")}>Details</Link></button>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><Link to={"/mykitchen/ingredients/"}>Add</Link></button>
+                    <button onClick={()=>{addToMyIngredients(ing)}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
 
                   </td>
 
@@ -100,39 +100,37 @@ function IngredientSearch (props){
     // MYKITCHEN BACKEND SECTION
     /////////////////////
 
-    // ADD INGREDIENT
-    const addToMyIngredients = (ingredient)=>{
-        console.log(ingredient)
-        fetch(state.url+ "/ingredients/",{
-            method: "post",
-            headers: {
-                "Authorization": "Bearer " + state.token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({name: ingredient})
-        })
-        // Error Handler
-        .then((response)=>{
-            if(response.ok){
-                return response.json()
-            }
-            else{
-                if (response.status === 422){
-                throw new Error("Could not add Ingredient. You may already have added this Ingredient")}
-                else{
-                    throw new Error("An error of type " + response.status + " occured")
-                };
-            }
-        })
-        // If no error, add to state.myIngredients.
-        .then((responseJson) => {
-            dispatch({type:"myIngredients", payload: responseJson})
-          })
-          .catch((error) => {
-            window.alert(error)
-          });
-    
-    }
+    // // ADD INGREDIENT
+    // const addToMyIngredients = (ingredient)=>{
+    //     fetch(state.url+ "/ingredients/",{
+    //         method: "post",
+    //         headers: {
+    //             "Authorization": "Bearer " + state.token,
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({name: ingredient})
+    //     })
+    //     // Error Handler
+    //     .then((response)=>{
+    //         if(response.ok){
+    //             return response.json()
+    //         }
+    //         else{
+    //             if (response.status === 422){
+    //             throw new Error("Could not add Ingredient. You may already have added this Ingredient")}
+    //             else{
+    //                 throw new Error("An error of type " + response.status + " occured")
+    //             };
+    //         }
+    //     })
+    //     // If no error, add to state.myIngredients.
+    //     .then((responseJson) => {
+    //         dispatch({type:"myIngredients", payload: responseJson})
+    //       })
+    //       .catch((error) => {
+    //         window.alert(error)
+    //       });
+    // }
 
 
     /////////////////////

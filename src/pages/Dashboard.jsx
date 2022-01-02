@@ -36,15 +36,11 @@ function Dashboard (props) {
             <div className="my-8 relative z-10">
                 <MyRecipes />
                 <h1>View All of My Recipes</h1>
-                <h1>Search for New Recipes</h1>
-                <Search />
             </div>
 
             <div className="my-8">
                 <MyIngredients />
                 <h1>View All of My Ingredients</h1>
-                <h1>Search for New Ingredients</h1>
-                <Search />
             </div>
         </>
     )
