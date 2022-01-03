@@ -126,6 +126,22 @@ const deleteMyIngredient = (id)=>{
   );
 }
 
+  // DELETE RECIPE
+  const deleteMyRecipe = (id) =>{    
+
+    console.log("Delete route")
+    return fetch(state.url+ "/user_recipes/"+id,{
+        method: "delete",
+        headers: {
+            "Authorization": "Bearer " + state.token
+        }
+    })
+    .then( (response) => {if(response.ok) {return response.json()}
+        else{throw new Error("An error of type " + response.status + " occured")}})
+    .then((data)=>{dispatch({type: "myRecipes", payload: data})})
+    .catch((error) => {window.alert(error)})
+    } 
+
   return (
 
     <>
@@ -145,7 +161,7 @@ const deleteMyIngredient = (id)=>{
 
       <Route path="/mykitchen/search/recipes" element={<RecipeSearch getMyIngredients={getMyIngredients} />} /> 
 
-      <Route path="/mykitchen/recipe" element={<ShowRecipe getMyIngredients={getMyIngredients} getMyRecipes={getMyRecipes}/>} />
+      <Route path="/mykitchen/recipe" element={<ShowRecipe getMyIngredients={getMyIngredients} getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe}/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
 
     </Routes>

@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useAppState } from "../AppState";
 import { checkIngredients } from "../AppState";
 
-function ShowRecipe ({getMyIngredients, getMyRecipes}){
+function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
     const {state, dispatch} = useAppState()
 
     const [recipe, setRecipe] = useState()
@@ -61,6 +61,25 @@ function ShowRecipe ({getMyIngredients, getMyRecipes}){
         })
         .catch((error) => { window.alert(error)})}
 
+        // Make Add/Delete Button
+        const button = (label)=>{
+            let button = (
+                <button onClick={()=>{addToMyRecipes()}} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Add to MyRecipes
+                </button>)
+
+            state.myRecipes.some((item, index) => {if(item.name === label){
+                console.log(index)
+            button = (
+            <button onClick={()=>{deleteMyRecipe(state.myRecipes[index].id)}} className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Delete from MyRecipes
+            </button>)
+            }})
+
+            return button
+        }
+    
+
     //////////////////////
     // LOADING/LOADED
     /////////////////////
@@ -71,6 +90,8 @@ function ShowRecipe ({getMyIngredients, getMyRecipes}){
     }
 
     const loaded = ()=>{
+
+
 
         return(
         <div className="m-8 flex justify-around">
@@ -90,8 +111,11 @@ function ShowRecipe ({getMyIngredients, getMyRecipes}){
                         )
                     })}
                     <br />
-                    <h5 className="text-blue-500 font-bold text-xl tracking-tight mb-2 dark:text-white underline"><a target="_blank" href={recipe.url}>View on {recipe.source}</a></h5>
-
+                    {button(recipe.label)}
+                    <br />
+                    <br />
+                    <h5 className="text-blue-500 font-bold text-xl tracking-tight mb-2 dark:text-white underline"><a target="_blank" rel="noreferrer" href={recipe.url}>View on {recipe.source}</a></h5>
+                    
                 </div>
             </div>
         </div>
@@ -99,7 +123,7 @@ function ShowRecipe ({getMyIngredients, getMyRecipes}){
     }
 
     ////////////////////////
-    // USE EFFECT
+    // USE EFFECTs
     ////////////////////////
    
     useEffect(()=>{
@@ -111,7 +135,6 @@ function ShowRecipe ({getMyIngredients, getMyRecipes}){
     /////////////////////
     return (
         <>
-        <h1>Show Recipe</h1>
             {recipe ? loaded() : loading() }
         </>
     )

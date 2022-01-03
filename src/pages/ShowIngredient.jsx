@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { useAppState } from "../AppState"
 
-function ShowIngredient ({deleteMyIngredient}){
+function ShowIngredient ({deleteMyIngredient, addToMyIngredients}){
 
     const {dispatch, state} = useAppState()
 
@@ -37,24 +37,22 @@ function ShowIngredient ({deleteMyIngredient}){
     // FUNCTIONS
     /////////////////////
 
-    const canAdd = (ingredientId)=>{
+    const canAdd = (ingredientId, ingredientName)=>{
         let element = null
         if(state.myIngredients){
             state.myIngredients.some((x, i) => {
                 if(x.edemam_id === ingredientId){
                     console.log("FOUND")
                 element = 
-                (<button onClick={()=>{deleteMyIngredient(state.myIngredients[i].id)}} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                (<button onClick={()=>{deleteMyIngredient(state.myIngredients[i].id)}} className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Delete from MyIngredients
-                    <svg className="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                 </button>)
                 return element
                 }
                 else{
                     element =     
-                    (<button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    (<button onClick={()=>{addToMyIngredients(ingredientName)}} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Add to MyIngredients
-                    <svg className="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                     </button>)
                 }
             })
@@ -112,7 +110,7 @@ function ShowIngredient ({deleteMyIngredient}){
                     </p>
 
 
-                    {canAdd(ingredient.hints[0].food.foodId)}
+                    {canAdd(ingredient.hints[0].food.foodId, ingredient.hints[0].food.label)}
 
                 </div>
             </div>
