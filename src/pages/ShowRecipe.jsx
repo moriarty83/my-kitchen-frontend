@@ -3,18 +3,41 @@ import { useParams, Link } from "react-router-dom";
 import { useAppState } from "../AppState";
 import { checkIngredients } from "../AppState";
 
-function ShowRecipe (props){
+function ShowRecipe ({getMyIngredients, getMyRecipes}){
     const {state, dispatch} = useAppState()
-    const params = useParams();
+
+    const [recipe, setRecipe] = useState()
+    
+    const queryParams = new URLSearchParams(window.location.search)
+    const query = queryParams.get("query")
     
 
     //////////////////////
     // FUNCTIONS
     /////////////////////
 
+     /////////////////////
+    // EDEMAM API SECTION
+    /////////////////////
+    const id = process.env.REACT_APP_EDEMAM_RECIPE_APP_ID;
+    const key = process.env.REACT_APP_EDEMAM_RECIPE_KEY;
+
+    const [recipes, setRecipes] = useState(null);
+
+    // URL For API Request
+    const recipeURL = `https://api.edamam.com/api/recipes/v2/${query}?type=public&app_id=${id}&app_key=${key}`
+    console.log(recipeURL)
+    const requestRecipe = ()=>{
+        fetch(recipeURL,{
+            method: "get",
+            headers: {
+            },
+            })
+            .then( response => response.json()
+                ). then( (data)=> setRecipe(data.recipe))}
+
     // ADD TO MY RECIPES
     const addToMyRecipes = ()=>{
-        console.log(recipe.label)
         const recipeJson = JSON.stringify(recipe)
         fetch(state.url+ "/recipes/",{
             method: "post",
@@ -38,22 +61,6 @@ function ShowRecipe (props){
         })
         .catch((error) => { window.alert(error)})}
 
-    const recipe = state.recipe ? state.recipe : JSON.parse(window.sessionStorage.getItem("recipe"));
-
-
-    const checkIngredients = (recipe) =>{
-        console.log("hello")
-        let count = 0;
-        for(let i in recipe.ingredients){
-            console.log(recipe.ingredients[i]["foodId"])
-            if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
-                console.log("ingredient match")
-                count += 1
-            }
-        }
-        return count
-    }
-
     //////////////////////
     // LOADING/LOADED
     /////////////////////
@@ -64,25 +71,41 @@ function ShowRecipe (props){
     }
 
     const loaded = ()=>{
-        // const inStock = checkIngredients(recipe)
 
         return(
-            <div className="show-recipe">
-            <h1>{recipe.label}</h1>
-            {/* <h2>You have {inStock} items in stock.</h2> */}
-            <img src={recipe.image} alt={recipe.label + "image"} />
-            <h4>Serves: {recipe.yield}</h4>
-            <h4>Time: {recipe.totalTime}</h4>
-            <h4>Calories: {recipe.calories}</h4>
-            <h2>Ingredients</h2>
-            {recipe.ingredientLines.map((element, index)=>{return(<p key={index}>{element}</p>)})}
-            <button onClick={addToMyRecipes}>Save to My Recipes</button>
-            <h3>View Full Recipe on <a href={recipe.url} target="_blank">{recipe.source}</a></h3>
-            
+        <div className="m-8 flex justify-around">
+            <div className="bg-gray-900 shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 opacity-90">
+                
+                <img className="rounded-t-lg w-full" src={recipe.image} alt="" />
+                
+                <div className="p-5">
+                    
+                    <h5 className="text-white font-bold text-2xl tracking-tight mb-2 dark:text-white underline">{recipe.label}</h5>
+                    
+                    {recipe.ingredientLines.map((element, index)=>{
+                        const hasItem = state.myIngredients.some(item => item.edemam_id === recipe.ingredients[index].foodId)
+                        const hasImg = hasItem ? <img className="h-5 inline" src="/green_check.png" alt="green check mark" /> : ""
+                        return(
+                        <p key={index} className="text-white">{element} {hasImg}</p>
+                        )
+                    })}
+                    <br />
+                    <h5 className="text-blue-500 font-bold text-xl tracking-tight mb-2 dark:text-white underline"><a target="_blank" href={recipe.url}>View on {recipe.source}</a></h5>
+
+                </div>
             </div>
+        </div>
         )
     }
+
+    ////////////////////////
+    // USE EFFECT
+    ////////////////////////
    
+    useEffect(()=>{
+        getMyIngredients()
+        .then(()=>requestRecipe()).then(()=>{getMyRecipes()})
+    }, [])
     //////////////////////
     // RETURN
     /////////////////////

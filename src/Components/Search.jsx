@@ -44,7 +44,10 @@ function Search (props){
             return
         }
         if(type === 'ingredients'){
-            navigate("/mykitchen/search/ingredients?query="+formData.search)
+            navigate("/mykitchen/search/ingredients?query="+formData.search.replace(" ", "%20"))
+        }
+        if(type === 'recipes'){
+            navigate("/mykitchen/search/recipes?query="+formData.search.replace(" ", "%20"))
         }
         console.log(selected.name.toLowerCase())
         console.log(formData)

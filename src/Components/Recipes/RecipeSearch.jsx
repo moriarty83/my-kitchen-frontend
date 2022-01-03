@@ -10,6 +10,8 @@ import Recipe from "./Recipe";
 function RecipeSearch ({viewRecipe, listIngredients}) {
     const {dispatch, state} = useAppState();
 
+    const queryParams = new URLSearchParams(window.location.search)
+    const query = queryParams.get("query")
 
 
     /////////////////////
@@ -24,7 +26,7 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     const [searchTerm, setSearchTerm] = useState()
 
     // URL For API Request
-    const recipeURL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${id}&app_key=${key}&q=${searchTerm}`
+    const recipeURL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${id}&app_key=${key}&q=${query}`
 
     const searchRecipes = ()=>{
         fetch(recipeURL,{
@@ -33,7 +35,7 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
             },
             })
             .then( response => response.json()
-                ). then( (data)=> dispatch({type: "foundRecipes", payload: data.hits}))}
+                ). then( (data)=> setRecipes(data.hits))}
     
     // let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
     
@@ -65,9 +67,7 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     } 
 
     const loaded = ()=>{
-        window.sessionStorage.setItem("recipes", JSON.stringify(state.foundRecipes))
-        
-        const recipeElements = state.foundRecipes.map((element, index)=>{
+        const recipeElements = recipes.map((element, index)=>{
 
             return(<Recipe key={index} recipe={element.recipe} />
 
@@ -79,16 +79,17 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     /////////////////////
     // USE EFFECT
     /////////////////////
-    useEffect(()=>{if(searchTerm){searchRecipes()}}, [searchTerm])
+    useEffect(()=>{searchRecipes()}, [])
 
     /////////////////////
     // RETURN
     /////////////////////
     return(
         <>
-            <h1>Recipes</h1>
-            <Search setSearchTerm={setSearchTerm} />
-            { state.foundRecipes ? loaded() : loading() }
+            <h4 className="text-white underline text-3xl mx-4" id="whoobe-3mr7n">Results for "{query.replace("%20", " ")}"</h4>
+            <div className="flex flex-row flex-wrap justify-around">
+            { recipes ? loaded() : loading() }
+            </div>
         </>
     )
 }

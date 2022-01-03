@@ -9,10 +9,11 @@ function Recipe({recipe}){
         const {state, dispatch } = useAppState();
 
         const viewRecipe = (recipe)=>{
+            const query = recipe.uri.split("#")[1]
             dispatch({type: "recipe", payload: recipe})
             window.sessionStorage.setItem("recipe", JSON.stringify(recipe))
             window.scrollTo(0, 0)
-            navigate("/foundRecipes/recipe")
+            navigate("/mykitchen/recipe?query="+query)
         }
         
         const handleDelete = (id) =>{    

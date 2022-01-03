@@ -14,7 +14,8 @@ import IngredientSearch from './Ingredients/IngredientSearch';
 import ShowRecipe from '../pages/ShowRecipe';
 import Profile from '../pages/Profile';
 import Delete from './User/Delete';
-import MyIngredientsIndex from './Ingredients/MyIngredientsIndex';
+import MyIngredientsIndex from '../pages/MyIngredientsIndex';
+import RecipeSearch from './Recipes/RecipeSearch';
 
 
 
@@ -42,6 +43,21 @@ function App(props) {
       dispatch({type: "foundRecipes", payload: sessionRecipes})
     }
   }, [])
+
+
+  const getMyRecipes = ()=>{
+    return fetch(state.url+ "/recipes/",{
+        method: "get",
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+        },
+    })
+    .then( response => response.json()
+        )
+    .then ( data => 
+        dispatch({type: "myRecipes", payload: data})
+    )}
 
   const getMyIngredients = ()=>{
     console.log(state.token)
@@ -117,16 +133,19 @@ const deleteMyIngredient = (id)=>{
     <Routes>
       {auth ? <Route exact path="/" element={<Dashboard/>} /> : 
       <Route exact path="/" element={<Home/>} />}
-      <Route path="/auth/:form" element={<Auth />} />
-      <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
-      <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
 
-      <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
+      <Route path="/auth/:form" element={<Auth />} />
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
+
+      <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
+      <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
+      <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
       <Route path="/mykitchen/search/ingredients" element={<IngredientSearch addToMyIngredients={addToMyIngredients} />} /> 
 
-      <Route path="/foundRecipes/recipe" element={<ShowRecipe />} />
+      <Route path="/mykitchen/search/recipes" element={<RecipeSearch getMyIngredients={getMyIngredients} />} /> 
+
+      <Route path="/mykitchen/recipe" element={<ShowRecipe getMyIngredients={getMyIngredients} getMyRecipes={getMyRecipes}/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
 
     </Routes>

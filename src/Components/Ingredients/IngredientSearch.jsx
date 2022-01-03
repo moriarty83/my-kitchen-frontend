@@ -100,37 +100,6 @@ function IngredientSearch ({addToMyIngredients}){
     // MYKITCHEN BACKEND SECTION
     /////////////////////
 
-    // // ADD INGREDIENT
-    // const addToMyIngredients = (ingredient)=>{
-    //     fetch(state.url+ "/ingredients/",{
-    //         method: "post",
-    //         headers: {
-    //             "Authorization": "Bearer " + state.token,
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({name: ingredient})
-    //     })
-    //     // Error Handler
-    //     .then((response)=>{
-    //         if(response.ok){
-    //             return response.json()
-    //         }
-    //         else{
-    //             if (response.status === 422){
-    //             throw new Error("Could not add Ingredient. You may already have added this Ingredient")}
-    //             else{
-    //                 throw new Error("An error of type " + response.status + " occured")
-    //             };
-    //         }
-    //     })
-    //     // If no error, add to state.myIngredients.
-    //     .then((responseJson) => {
-    //         dispatch({type:"myIngredients", payload: responseJson})
-    //       })
-    //       .catch((error) => {
-    //         window.alert(error)
-    //       });
-    // }
 
 
     /////////////////////

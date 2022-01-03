@@ -7,7 +7,6 @@ function MyRecipes ({viewRecipe}) {
     const {dispatch, state} = useAppState()
     const token = JSON.parse(window.localStorage.getItem("auth")).token
 
-    console.log(state.myRecipes)
 
     // GET MYRECIPES
     const getMyRecipes = ()=>{
@@ -33,10 +32,11 @@ function MyRecipes ({viewRecipe}) {
         
         const items = state.myRecipes.map((element, index)=>{
             const recipe = JSON.parse(element.json)
-            return({name: element.name, image: recipe.image, id: element.edemam_id
+            const id = recipe.uri.split("#")[1]
+            return({name: element.name, image: recipe.image, id: id
             })
         })
-        return <ItemSlider type="ingredient" items={items} />
+        return <ItemSlider type="recipe" items={items} />
     }
     
   

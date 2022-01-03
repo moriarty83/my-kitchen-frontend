@@ -1,5 +1,5 @@
 import React, { useEffect} from "react";
-import { useAppState } from "../../AppState";
+import { useAppState } from "../AppState"
 
 
 function MyIngredientsIndex({getMyIngredients, deleteMyIngredient}){

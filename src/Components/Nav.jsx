@@ -51,12 +51,12 @@ function Nav (props){
                 <div className="flex-shrink-0 flex items-center">
                   <img
                     className="block lg:hidden h-8 w-auto"
-                    src="mykitchen_logo1_white.png"
+                    src="/mykitchen_logo1_white.png"
                     alt="MyKitchen logo"
                   />
                   <img
                     className="hidden lg:block h-8 w-auto"
-                    src="mykitchen_logo1_white.png"
+                    src="/mykitchen_logo1_white.png"
                     alt="MyKitchen logo"
                   />
                 </div>
