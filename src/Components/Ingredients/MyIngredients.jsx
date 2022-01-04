@@ -54,7 +54,7 @@ function MyIngredients(props){
 
             {state.myIngredients ? loaded() : loading()}
             <div className="bg-gray-800 bg-opacity-75 border-b-2">
-            <h4 className="text-white text-right text-xl mx-4" id="whoobe-3mr7n"><a href="/mykitchen/ingredients/all">View All</a></h4>
+            <h4 className="text-white text-right text-xl mx-4" id="whoobe-3mr7n"><a href="/mykitchen/ingredients/all">View All MyIngredients</a></h4>
             </div>
 
         </div>

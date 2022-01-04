@@ -32,7 +32,7 @@ function Recipes () {
     const listIngredients = (ingredients) =>{
         const list = ingredients.map((element)=>{
             return(
-                <p class="my-4" id="whoobe-950fw">{element.food}</p>
+                <p className="my-4" id="whoobe-950fw">{element.food}</p>
 
             )
         })

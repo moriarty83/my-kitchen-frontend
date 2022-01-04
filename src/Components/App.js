@@ -1,4 +1,6 @@
 import React, { useState,useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 import {Routes, Route} from 'react-router-dom'
 import {useAppState} from "../AppState"
@@ -15,17 +17,19 @@ import ShowRecipe from '../pages/ShowRecipe';
 import Profile from '../pages/Profile';
 import Delete from './User/Delete';
 import MyIngredientsIndex from '../pages/MyIngredientsIndex';
+import MyRecipesIndex from '../pages/MyRecipesIndex';
 import RecipeSearch from './Recipes/RecipeSearch';
 
 
 
 function App(props) {
   const {state, dispatch} = useAppState();
-
+  const navigate = useNavigate()
   
   const auth = JSON.parse(window.localStorage.getItem("auth"))
   const sessionRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
-  const token = JSON.parse(window.localStorage.getItem("auth")).token
+  const token = window.localStorage.getItem("auth") ? JSON.parse(window.localStorage.getItem("auth")).token : ""
+
 
 
   useState(()=>{
@@ -36,11 +40,13 @@ function App(props) {
       }
       else{
         dispatch({type: "logout"})
+        navigate("/")
       }
         
     }
-    if (JSON.parse(window.sessionStorage.getItem("recipes"))){
-      dispatch({type: "foundRecipes", payload: sessionRecipes})
+    else{
+      console.log("not Logged in")
+      navigate("/")
     }
   }, [])
 
@@ -142,27 +148,32 @@ const deleteMyIngredient = (id)=>{
     .catch((error) => {window.alert(error)})
     } 
 
+  
+
   return (
 
     <>
-    <Nav />
+
+    {auth ? <Nav /> : ""}
     <Routes>
       {auth ? <Route exact path="/" element={<Dashboard/>} /> : 
       <Route exact path="/" element={<Home/>} />}
 
-      <Route path="/auth/:form" element={<Auth />} />
+      <Route path="/auth" element={<Auth />} />
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
 
-      <Route path="/mykitchen/ingredients" element={<Ingredients />} /> 
+      {/* <Route path="/mykitchen/ingredients" element={<Ingredients />} />  */}
       <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
       <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
       <Route path="/mykitchen/search/ingredients" element={<IngredientSearch addToMyIngredients={addToMyIngredients} />} /> 
 
+      
+      <Route path="/mykitchen/recipes/all" element={<MyRecipesIndex getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe} />} /> 
       <Route path="/mykitchen/search/recipes" element={<RecipeSearch getMyIngredients={getMyIngredients} />} /> 
 
       <Route path="/mykitchen/recipe" element={<ShowRecipe getMyIngredients={getMyIngredients} getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe}/>} />
-      <Route path="/dashboard" element={<Dashboard/>} />
+      {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
 
     </Routes>
     </>

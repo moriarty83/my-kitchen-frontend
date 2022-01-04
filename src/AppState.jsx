@@ -23,7 +23,7 @@ const initialState = {
 // action = {type: "", payload: ---}
 const reducer = (state, action)=>{
     let newState;
-    console.log("Payload: " + action.payload)
+    
     switch(action.type){
         case  "auth":
             newState = {...state, ...action.payload}
@@ -32,6 +32,7 @@ const reducer = (state, action)=>{
             newState = {...state, token: null, email: null}
             window.localStorage.removeItem("auth")
             window.sessionStorage.removeItem("recipe")
+
             return newState
         case "myIngredients":
             newState = {...state, myIngredients: action.payload}
@@ -77,7 +78,7 @@ export function AppState (props){
     const [state, dispatch] = useReducer(reducer, initialState)
 
     return(
-        <AppContext.Provider value={{state, dispatch, GetMyIngredients}}>
+        <AppContext.Provider value={{state, dispatch}}>
             {props.children}
         </AppContext.Provider>
     )
@@ -91,38 +92,4 @@ export function AppState (props){
 
 export const useAppState = ()=>{
     return React.useContext(AppContext)
-}
-
-/////////////////////////
-// MY INGREDIENTS
-/////////////////////////
-const GetMyIngredients = ()=>{
-    const {state, dispatch} = useAppState()
-    return fetch(state.url+ "/ingredients",{
-        method: "get",
-        headers: {
-            "Authorization": "Bearer " + state.token,
-            "Content-Type": "application/json"
-        },
-
-    })
-    .then( response => response.json()
-        ). then ( data => dispatch({type: "myIngredients", payload: data}))}
-
-
-/////////////////////////
-// CHECK INGREDIENTS
-/////////////////////////
-
-export const checkIngredients = (recipe, state) =>{
-    console.log("hello")
-    let count = 0;
-    for(let ingredient in recipe.ingredients){
-        console.log(ingredient)
-        if (state.myIngredients.includes(ingredient.food)){
-            console.log("ingredient match")
-            count += 1
-        }
-    }
-    return count
 }

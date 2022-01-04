@@ -103,13 +103,15 @@ function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
                     
                     <h5 className="text-white font-bold text-2xl tracking-tight mb-2 dark:text-white underline">{recipe.label}</h5>
                     
-                    {recipe.ingredientLines.map((element, index)=>{
-                        const hasItem = state.myIngredients.some(item => item.edemam_id === recipe.ingredients[index].foodId)
-                        const hasImg = hasItem ? <img className="h-5 inline" src="/green_check.png" alt="green check mark" /> : ""
-                        return(
-                        <p key={index} className="text-white">{element} {hasImg}</p>
-                        )
-                    })}
+                    { recipe.ingredients.map((element, index)=>{
+                        
+                            const hasItem = state.myIngredients.some(item => item.edemam_id === recipe.ingredients[index].foodId)
+                            const hasImg = hasItem ? <img className="h-5 inline" src="/green_check.png" alt="green check mark" /> : ""
+                            return(
+                                <p key={index} className="text-white">{element.text} {hasImg}</p>
+                            )
+                        }
+                    )}
                     <br />
                     {button(recipe.label)}
                     <br />

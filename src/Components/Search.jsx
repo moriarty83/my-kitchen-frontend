@@ -82,21 +82,21 @@ function Search (props){
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
                 >
-                <Listbox.Options className="absolute z-20 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm m-4">
+                <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm m-4">
                     {menuOptions.map((option) => (
                     <Listbox.Option
                         key={option.id}
                         className={({ active }) =>
                         classNames(
-                            active ? 'text-white bg-indigo-600 z-20' : 'text-gray-900',
-                            'cursor-default select-none relative py-2 pl-3 pr-9 z-20'
+                            active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                            'cursor-default select-none relative py-2 pl-3 pr-9'
                         )
                         }
                         value={option}
                     >
                         {({ selected, active }) => (
                         <>
-                            <div className="flex items-center z-20">
+                            <div className="flex items-center">
                             <img src={option.avatar} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
                             <span
                                 className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}

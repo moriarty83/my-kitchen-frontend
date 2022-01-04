@@ -20,10 +20,11 @@ function Nav (props){
     }
 
     const navigation = [
-    { name: 'Dashboard', href: '/dashboard', current: true },
-    !state.token ? { name: 'Sign Up', href: '/auth/signup', current: false} : { name: 'Account', href: '/mykitchen/account', current: false},
-    !state.token ? { name: 'Login', href: '/auth/login', current: false} : { name: 'Logout', href: '/auth/login', current: false},
-]
+    { name: 'Dashboard', href: '/', current: true },
+    { name: 'MyIngredients', href: '/mykitchen/ingredients/all', current: false },
+    { name: 'MyRecipes', href: '/mykitchen/recipes/all', current: false },
+    
+    ]
 
     function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -31,7 +32,7 @@ function Nav (props){
 
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 relative z-20">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -112,7 +113,7 @@ function Nav (props){
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/mykitchen/account"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
@@ -122,18 +123,8 @@ function Nav (props){
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            onClick={()=>{handleLogout()}}
+                            className={classNames(active ? 'bg-gray-100 cursor-pointer' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer relative')}
                           >
                             Sign out
                           </a>

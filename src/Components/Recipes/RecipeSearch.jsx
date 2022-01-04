@@ -68,7 +68,7 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
 
     const loaded = ()=>{
         const recipeElements = recipes.map((element, index)=>{
-
+            
             return(<Recipe key={index} recipe={element.recipe} />
 
             )
