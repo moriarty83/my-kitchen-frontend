@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {useParams, useNavigate, Navigate } from "react-router-dom"
 import { useAppState } from "../AppState"
 import Avatars from "../Components/Avatars";
+import Modal from "../Components/WelcomeModal";
 
 function Auth (props) {
 
@@ -42,12 +43,12 @@ function Auth (props) {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({email: formData.email, password:formData.password, nicname: formData.nickname})
+                    body: JSON.stringify({email: formData.email, password:formData.password, nickname: formData.nickname})
                 })
                 .then( response => response.json()
-                    )
+                )
             }
-            },
+        },
         
         login: ()=>{
             return fetch(state.url+ "/login/",{
@@ -203,7 +204,7 @@ function Auth (props) {
                 <input type="text" name="nickname" onChange={handleChange}/>
                 <input type="submit" value={type} />
             </form> */}
-            
+            <Modal formData={formData} setUserData={setUserData}/>
         </div>
     )
 }
