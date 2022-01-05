@@ -1,10 +1,8 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect} from "react";
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-function Avatars(){
-
-    
+function Avatars({selected, setSelected}){
 
     const avatars = [
         {file: "alex-lvrs-On2VseHUDXw-unsplash.jpg" , artist: "Alex Lvrs"},
@@ -29,7 +27,7 @@ function Avatars(){
         {file: "thought-catalog-9aOswReDKPo-unsplash.jpg" , artist: "Thought Catalog"},
     ]
 
-    const [selected, setSelected] = useState(avatars[2]);
+    // const [selected, setSelected] = useState(avatars[2]);
 
     const handleSelect = (index)=>{
         setSelected(index)
@@ -39,6 +37,7 @@ function Avatars(){
         return classes.filter(Boolean).join(' ')
         }
 
+    useEffect(()=>{setSelected(avatars[2])}, [])
 
     return(
         <>

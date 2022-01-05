@@ -13,6 +13,31 @@ function Auth (props) {
     const queryParams = new URLSearchParams(window.location.search)
     const query = queryParams.get("query")
 
+    const avatars = [
+        {file: "alex-lvrs-On2VseHUDXw-unsplash.jpg" , artist: "Alex Lvrs"},
+        {file: "alice-pasqual-ticuPP5l2qg-unsplash.jpg" , artist: "Alice Pasqual"},
+        {file: "allec-gomes-xnRg3xDcNnE-unsplash.jpg" , artist: "Allec Gomes"},
+        {file: "bon-vivant-qom5MPOER-I-unsplash.jpg" , artist: "Bon Vivant"},
+        {file: "brooke-lark-M4E7X3z80PQ-unsplash.jpg" , artist: "Brook Lark"},
+        {file: "calum-lewis-8Nc_oQsc2qQ-unsplash.jpg" , artist: "Calum Lewis"},
+        {file: "calum-lewis-vA1L1jRTM70-unsplash.jpg" , artist: "Calum Lewis"},
+        {file: "chad-montano--GFCYhoRe48-unsplash.jpg" , artist: "Chad Montano"},
+        {file: "chad-montano-M0lUxgLnlfk-unsplash.jpg" , artist: "Chad Montano"},
+        {file: "charles-deluvio-D-vDQMTfAAU-unsplash.jpg" , artist: "Charles DeLuvio"},
+        {file: "dose-juice-sTPy-oeA3h0-unsplash.jpg" , artist: "Dose Juice"},
+        {file: "emile-mbunzama-cLpdEA23Z44-unsplash.jpg" , artist: "Emile Mbunzama"},
+        {file: "joseph-gonzalez-QaGDmf5tMiE-unsplash.jpg" , artist: "Joseph Gonzalez"},
+        {file: "karly-gomez-lK1Q5RyD6tc-unsplash.jpg" , artist: "Karly Gomez"},
+        {file: "nadeykina-evgeniya-epeLqDQh2PE-unsplash.jpg" , artist: "Nadekina Evgeniya"},
+        {file: "olayinka-babalola-r01ZopTiEV8-unsplash.jpg" , artist: "Olayinka Babalola"},
+        {file: "rumman-amin-LNn6O_Mt730-unsplash.jpg" , artist: "Rumman Amin"},
+        {file: "sheri-silver-5A0O12BIsjY-unsplash.jpg" , artist: "Sheri Silver"},
+        {file: "slashio-photography-ZG9ggI_pjFw-unsplash.jpg" , artist: "Slashio Photography"},
+        {file: "thought-catalog-9aOswReDKPo-unsplash.jpg" , artist: "Thought Catalog"},
+    ]
+
+    const [selected, setSelected] = useState(avatars[2])
+
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -21,13 +46,15 @@ function Auth (props) {
     const [userData, setUserData] = useState(null)
     const {state, dispatch} = useAppState()
 
+
+
     React.useEffect(()=>{
         if (userData){
             console.log(userData);
             console.log(Date.now())
             const {token, user, exp} = userData;
-            dispatch({type: "auth", payload: { token, email: user.email, exp}})
-            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, exp: exp}))   
+            dispatch({type: "auth", payload: { token, email: user.email, icon: user.icon, exp}})
+            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, nickname: user.nickname, icon: user.icon, exp: exp}))   
         }
     }, [userData])    
 
@@ -122,7 +149,7 @@ function Auth (props) {
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
                                 name="confirm_password"
                                 placeholder="Confirm Password" />
-                            <Avatars />
+                            <Avatars selected={selected} setSelected={setSelected} avatars={avatars}/>
                             <button
                                 type="submit"
                                 className="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1"
@@ -204,7 +231,7 @@ function Auth (props) {
                 <input type="text" name="nickname" onChange={handleChange}/>
                 <input type="submit" value={type} />
             </form> */}
-            <Modal formData={formData} setUserData={setUserData}/>
+            <Modal formData={formData} setUserData={setUserData} selected={selected}/>
         </div>
     )
 }

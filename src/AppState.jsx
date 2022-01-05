@@ -9,6 +9,7 @@ const initialState = {
     url: "http://localhost:3000",
     token: null,
     email: null,
+    icon: null,
     nickname: null,
     myIngredients: null,
     myRecipes: null,
@@ -32,7 +33,6 @@ const reducer = (state, action)=>{
             newState = {...state, token: null, email: null}
             window.localStorage.removeItem("auth")
             window.sessionStorage.removeItem("recipe")
-
             return newState
         case "myIngredients":
             newState = {...state, myIngredients: action.payload}

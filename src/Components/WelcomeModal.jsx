@@ -75,7 +75,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
-function WelcomeModal({formData, setUserData}) {
+function WelcomeModal({formData, setUserData, selected}) {
     const {state, dispatch} = useAppState();
     const navigate = useNavigate();
     let subtitle;
@@ -100,8 +100,8 @@ function WelcomeModal({formData, setUserData}) {
                 starters.push({ingredient_id: item})
             }
         }
-        const user = formData
-        const body = {formData: formData, starterIngredients: starters}
+        const user = {...formData, icon: selected.file}
+        const body = {formData: user, starterIngredients: starters}
         console.log(body)
         createUser(body)
     }
