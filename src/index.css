@@ -20,6 +20,6 @@ code {
     monospace;
 }
 
-.margin-sm {
-  margin: 1em;
+.nickname {
+  font-family: "Copperplate", fantasy;
 }

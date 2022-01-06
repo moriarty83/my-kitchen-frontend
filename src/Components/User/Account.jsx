@@ -17,7 +17,7 @@ function Account(){
     const [selected, setSelected] = useState(state.avatars[2])
 
     const [formData, setFormData] = useState({
-        nickname: ""
+        nickname: state.nickname
     })
     /////////////////////
     // FUNCTIONS
@@ -132,8 +132,8 @@ function Account(){
                         <tr>
 
                             <td className="p-4"><h3 className="text-white text-xl">Nickname</h3></td>
-                            <td><input onChange={handleChange} type="text" name="nickname" id="" placeholder={state.nickname} /></td>
-                            <td className="p-4"><button onClick={updateNickname} className="text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center">Change Nickname</button></td>
+                            <td><input onChange={handleChange} type="text" name="nickname" id="" value={formData.nickname} /></td>
+                            
 
                         </tr>
 
@@ -143,7 +143,14 @@ function Account(){
                             <td>
                             <Avatars selected={selected} setSelected={setSelected}/>
                             </td>
-                            <td className="p-4"><button onClick={updateNickname} className="text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  " onClick={handleShowHide}>Update Icon</button></td>
+                        </tr>
+                        <br />
+                        <tr>
+                            <td>
+                            <td className="p-4"><button onClick={updateNickname} className="text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center">Update Profile</button></td>
+                            </td>
+                            <td></td>
+                            <td className="p-4">{deleteRequested ? <h3>Please Check your Email to Confirm Delete</h3> : <button className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-red-600 dark:hover:bg-red-700" onClick={requestDelete}>Delete Account</button>}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,7 +163,6 @@ function Account(){
                 </div> */}
 
 
-                {deleteRequested ? <h3>Please Check your Email to Confirm Delete</h3> : <button className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-red-600 dark:hover:bg-red-700 mt-12" onClick={requestDelete}>Delete Account</button>}
                 
             </div>
         </div>
