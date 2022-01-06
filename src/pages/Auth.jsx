@@ -33,7 +33,7 @@ function Auth (props) {
             console.log(Date.now())
             const {token, user, exp} = userData;
             dispatch({type: "auth", payload: { token, email: user.email, icon: user.icon, exp}})
-            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, exp: exp}))   
+            window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, nickname: user.nickname, icon: user.icon, exp: exp}))   
         }
     }, [userData])    
 
@@ -44,7 +44,9 @@ function Auth (props) {
                 return
             }
             else{
+                console.log(state.url+ "/users/")
                 return fetch(state.url+ "/users/",{
+                    
                     method: "post",
                     headers: {
                         "Content-Type": "application/json"

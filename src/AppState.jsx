@@ -6,7 +6,7 @@ import React, { useReducer } from 'react';
 /////////////////////////
 
 const initialState = {
-    url: process.env.MYKITCHEN_API,
+    url: REACT_APP_MYKITCHEN_URL,
     token: null,
     email: null,
     icon: null,
