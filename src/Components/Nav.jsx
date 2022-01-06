@@ -20,10 +20,9 @@ function Nav (props){
     }
 
     const navigation = [
-    { name: 'Dashboard', href: '/', current: true },
-    { name: 'MyIngredients', href: '/mykitchen/ingredients/all', current: false },
-    { name: 'MyRecipes', href: '/mykitchen/recipes/all', current: false },
-    
+    { name: 'Dashboard', href: '/', current: state.current[0] },
+    { name: 'MyIngredients', href: '/mykitchen/ingredients/all', current: state.current[1] },
+    { name: 'MyRecipes', href: '/mykitchen/recipes/all', current: state.current[2] },
     ]
 
     function classNames(...classes) {
@@ -80,13 +79,7 @@ function Nav (props){
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* <button
-                  type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button> */}
+                <h1>{state.nickname}</h1>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
@@ -94,7 +87,7 @@ function Nav (props){
                     <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="h-8 w-8 border-solid border-2 border-gray-400 rounded-full scale-125"
                         src={"/images/avatars/" + state.icon}
                         alt=""
                       />

@@ -10,7 +10,7 @@ import Search from "../Components/Search";
 
 function Dashboard (props) {
 
-    const { state } = useAppState();
+    const { dispatch, state } = useAppState();
 
     const checkIngredients = (recipe) =>{
         let count = 0;
@@ -26,7 +26,10 @@ function Dashboard (props) {
         window.scrollTo(0, 0);
       }
 
-    useEffect(()=>{window.scrollTo(0, 0)}, [])
+    useEffect(()=>{window.scrollTo(0, 0);
+        dispatch({type: "navigation", payload: [true, false, false]})
+    }, [])
+    
     return(
         <>  
             <div className="my-8 relative z-10" >

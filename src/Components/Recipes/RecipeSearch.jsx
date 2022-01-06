@@ -79,7 +79,9 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     /////////////////////
     // USE EFFECT
     /////////////////////
-    useEffect(()=>{searchRecipes()}, [])
+    useEffect(()=>{searchRecipes();
+        dispatch({type: "navigation", payload: [false, false, true]})
+    }, [])
 
     /////////////////////
     // RETURN

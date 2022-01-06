@@ -1,31 +1,11 @@
 import React, {Fragment, useEffect} from "react";
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { useAppState } from "../AppState";
 
-function Avatars({selected, setSelected}){
+function Avatars({selected, setSelected, avatars}){
 
-    const avatars = [
-        {file: "alex-lvrs-On2VseHUDXw-unsplash.jpg" , artist: "Alex Lvrs"},
-        {file: "alice-pasqual-ticuPP5l2qg-unsplash.jpg" , artist: "Alice Pasqual"},
-        {file: "allec-gomes-xnRg3xDcNnE-unsplash.jpg" , artist: "Allec Gomes"},
-        {file: "bon-vivant-qom5MPOER-I-unsplash.jpg" , artist: "Bon Vivant"},
-        {file: "brooke-lark-M4E7X3z80PQ-unsplash.jpg" , artist: "Brook Lark"},
-        {file: "calum-lewis-8Nc_oQsc2qQ-unsplash.jpg" , artist: "Calum Lewis"},
-        {file: "calum-lewis-vA1L1jRTM70-unsplash.jpg" , artist: "Calum Lewis"},
-        {file: "chad-montano--GFCYhoRe48-unsplash.jpg" , artist: "Chad Montano"},
-        {file: "chad-montano-M0lUxgLnlfk-unsplash.jpg" , artist: "Chad Montano"},
-        {file: "charles-deluvio-D-vDQMTfAAU-unsplash.jpg" , artist: "Charles DeLuvio"},
-        {file: "dose-juice-sTPy-oeA3h0-unsplash.jpg" , artist: "Dose Juice"},
-        {file: "emile-mbunzama-cLpdEA23Z44-unsplash.jpg" , artist: "Emile Mbunzama"},
-        {file: "joseph-gonzalez-QaGDmf5tMiE-unsplash.jpg" , artist: "Joseph Gonzalez"},
-        {file: "karly-gomez-lK1Q5RyD6tc-unsplash.jpg" , artist: "Karly Gomez"},
-        {file: "nadeykina-evgeniya-epeLqDQh2PE-unsplash.jpg" , artist: "Nadekina Evgeniya"},
-        {file: "olayinka-babalola-r01ZopTiEV8-unsplash.jpg" , artist: "Olayinka Babalola"},
-        {file: "rumman-amin-LNn6O_Mt730-unsplash.jpg" , artist: "Rumman Amin"},
-        {file: "sheri-silver-5A0O12BIsjY-unsplash.jpg" , artist: "Sheri Silver"},
-        {file: "slashio-photography-ZG9ggI_pjFw-unsplash.jpg" , artist: "Slashio Photography"},
-        {file: "thought-catalog-9aOswReDKPo-unsplash.jpg" , artist: "Thought Catalog"},
-    ]
+    const {state} = useAppState();
 
     // const [selected, setSelected] = useState(avatars[2]);
 
@@ -37,7 +17,10 @@ function Avatars({selected, setSelected}){
         return classes.filter(Boolean).join(' ')
         }
 
-    useEffect(()=>{setSelected(avatars[2])}, [])
+    
+
+    // useEffect(()=>{state.avatars.some((item, index) => {if(item.file === state.icon){
+    //     setSelected(state.avatars[index])}})}, [])
 
     return(
         <>
@@ -45,7 +28,7 @@ function Avatars({selected, setSelected}){
         <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">Icon</Listbox.Label>
+          <Listbox.Label className="block text-sm font-medium text-gray-700"></Listbox.Label>
           <div className="mt-1 relative">
             <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <span className="flex items-center">
@@ -65,7 +48,7 @@ function Avatars({selected, setSelected}){
               leaveTo="opacity-0"
             >
               <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                {avatars.map((item, index) => (
+                {state.avatars.map((item, index) => (
                   <Listbox.Option
                     key={index}
                     className={({ active }) =>

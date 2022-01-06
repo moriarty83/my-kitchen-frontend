@@ -109,7 +109,7 @@ function App(props) {
       .catch((error) => {
         window.alert(error)
       });
-}
+  }
 
 // DELETE INGREDIENT //////
 const deleteMyIngredient = (id)=>{
@@ -171,7 +171,6 @@ const deleteMyIngredient = (id)=>{
       
       <Route path="/mykitchen/recipes/all" element={<MyRecipesIndex getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe} />} /> 
       <Route path="/mykitchen/search/recipes" element={<RecipeSearch getMyIngredients={getMyIngredients} />} /> 
-
       <Route path="/mykitchen/recipe" element={<ShowRecipe getMyIngredients={getMyIngredients} getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe}/>} />
       {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
 

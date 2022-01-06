@@ -35,7 +35,8 @@ function MyIngredientsIndex({getMyIngredients, deleteMyIngredient}){
         return elements
     }
 
-    useEffect(()=>{getMyIngredients()}, [])
+    useEffect(()=>{getMyIngredients();
+        dispatch({type: "navigation", payload: [false, true, false]})}, [])
 
     return(
         <>

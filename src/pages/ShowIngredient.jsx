@@ -125,7 +125,8 @@ function ShowIngredient ({deleteMyIngredient, addToMyIngredients}){
     // USE EFFECT
     /////////////////////
     useEffect(()=>{
-        getMyIngredients().then(()=>{getIngredient()})
+        getMyIngredients().then(()=>{getIngredient()});
+        dispatch({type: "navigation", payload: [false, true, false]})
     }, [])
    
 

@@ -103,8 +103,7 @@ function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
                     
                     <h5 className="text-white font-bold text-2xl tracking-tight mb-2 dark:text-white underline">{recipe.label}</h5>
                     
-                    { recipe.ingredients.map((element, index)=>{
-                        
+                    { recipe.ingredients.map((element, index)=>{                        
                             const hasItem = state.myIngredients.some(item => item.edemam_id === recipe.ingredients[index].foodId)
                             const hasImg = hasItem ? <img className="h-5 inline" src="/green_check.png" alt="green check mark" /> : ""
                             return(
@@ -113,11 +112,10 @@ function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
                         }
                     )}
                     <br />
-                    {button(recipe.label)}
+                    { button(recipe.label) }
                     <br />
                     <br />
-                    <h5 className="text-blue-500 font-bold text-xl tracking-tight mb-2 dark:text-white underline"><a target="_blank" rel="noreferrer" href={recipe.url}>View on {recipe.source}</a></h5>
-                    
+                    <h5 className="text-blue-500 font-bold text-xl tracking-tight mb-2 dark:text-white underline"><a target="_blank" rel="noreferrer" href={recipe.url}>View on {recipe.source}</a></h5>   
                 </div>
             </div>
         </div>
@@ -130,7 +128,8 @@ function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
    
     useEffect(()=>{
         getMyIngredients()
-        .then(()=>requestRecipe()).then(()=>{getMyRecipes()})
+        .then(()=>requestRecipe()).then(()=>{getMyRecipes()});
+        dispatch({type: "navigation", payload: [false, false, true]})
     }, [])
     //////////////////////
     // RETURN
