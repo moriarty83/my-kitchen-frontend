@@ -94,7 +94,7 @@ function IngredientSearch ({addToMyIngredients}){
   </div> : "";
 
 
-    useEffect(searchIngredients, [])
+    useEffect(searchIngredients, [foundIngredients])
 
     /////////////////////
     // MYKITCHEN BACKEND SECTION

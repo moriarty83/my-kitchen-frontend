@@ -32,7 +32,7 @@ function App(props) {
 
 
 
-  useState(()=>{
+  useEffect(()=>{
     if (JSON.parse(window.localStorage.getItem("auth"))){
       // IF EXPIRATIN TIME NOT MET
       if(Date.now()<auth.exp*1000){
@@ -40,13 +40,13 @@ function App(props) {
       }
       else{
         dispatch({type: "logout"})
-        navigate("/")
+        // navigate("/")
       }
         
     }
     else{
       console.log("not Logged in")
-      navigate("/")
+      // navigate("/")
     }
   }, [])
 

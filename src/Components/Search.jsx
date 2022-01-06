@@ -29,6 +29,8 @@ function Search (props){
 
     const [selected, setSelected] = useState(menuOptions[0]);
 
+    const [search, setSearch] = useState();
+
     const handleChange = (event)=>{
         setFormData({...formData, [event.target.name]: event.target.value})
     }
@@ -45,9 +47,11 @@ function Search (props){
         }
         if(type === 'ingredients'){
             navigate("/mykitchen/search/ingredients?query="+formData.search.replace(" ", "%20"))
+            setSearch(search+1)
         }
         if(type === 'recipes'){
             navigate("/mykitchen/search/recipes?query="+formData.search.replace(" ", "%20"))
+            setSearch(search+1)
         }
         console.log(selected.name.toLowerCase())
         console.log(formData)
@@ -59,7 +63,7 @@ function Search (props){
 
     return (
 
-    <div className="flex flex-row flex-wrap items-center">
+    <div className="flex flex-row flex-wrap items-center relative z-20">
     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
             <>
