@@ -5,70 +5,95 @@ import Modal from 'react-modal';
 import { useAppState } from '../AppState';
 
 const starterBaking = [
-    {name: "All Purpose Flour", id: "40"},
-    {name: "Baking Powder", id: "53"},
-    {name: "Baking Soda", id: "50"},
-    {name: "Sugar", id: "52"},
-    {name: "Brown Sugar", id: "148"},
+    {name: "All Purpose Flour", id: "1"},
+    {name: "Baking Powder", id: "2"},
+    {name: "Baking Soda", id: "3"},
+    {name: "Sugar", id: "4"},
+    {name: "Brown Sugar", id: "5"},
 ]
 
 const starterHerbsSpices = [
-    {name: "Salt", id: ""},
-    {name: "Pepper", id: ""},
-    {name: "Ground Cinnamon", id: ""},
-    {name: "Garlic Powder", id: ""},
-    {name: "Dried Oregano", id: ""},
+    {name: "Salt", id: "11"},
+    {name: "Pepper", id: "12"},
+    {name: "Garlic Powder", id: "13"},
+    {name: "Dried Oregano", id: "14"},
+    {name: "Dried Dill", id: "15"},
+    {name: "Dried Thyme", id: "16"},
+    {name: "Ground Cinnamon", id: "17"},
 
 ]
 
-const starterCooking = [
-    {name: "Olive Oil", id: ""},
-    {name: "Vegatable Oil", id: ""},
-    {name: "Red Wine Vinegar", id: ""},
-    {name: "Garlic", id: ""},
-    {name: "", id: ""},
+const starterOilsSauces = [
+    {name: "Olive Oil", id: "6"},
+    {name: "Vegetable Oil", id: "7"},
+    {name: "Red Wine Vinegar", id: "8"},
+    {name: "White Wine Vinegar", id: "9"},
+    {name: "Soy Sauce", id: "10"},
 ]
 
 const starterDryGoods = [
-    {name: "White Rice", id: ""},
-    {name: "Brown Rice", id: ""},
-    {name: "Chicken Stock", id: ""},
-    {name: "Spaghetti", id: ""},
-    {name: "", id: ""},   
+    {name: "Rice", id: "56"},
+    {name: "Brown Rice", id: "57"},
+    {name: "Lentil", id: "58"},
+    {name: "Angel Hair Pasta", id: "59"},
+    {name: "Macaroni Pasta", id: "60"},   
 ]
 
-const starterFruts = [
-    {name: "Apples", id: ""},
-    {name: "Bananas", id: ""},
-    {name: "Grapes", id: ""},
-    {name: "Pears", id: ""},
-    {name: "Blueberries", id: ""},   
+const starterCannedGoods = [
+    {name: "Black Beans", id: "26"},
+    {name: "Red Kidney Beans", id: "27"},
+    {name: "Chickpeas", id: "28"},
+    {name: "Chicken Stock", id: "39"},
+    {name: "Beef Stock", id: "30"},
+    {name: "Vegetable Stock", id: "31"},
+    {name: "Fish Stock", id: "38"},   
 ]
 
-const starterVeg = [
-    {name: "", id: ""},
-    {name: "", id: ""},
-    {name: "", id: ""},
-    {name: "", id: ""},
-    {name: "", id: ""},   
+const starterMeatFish = [
+    {name: "Chicken Breast", id: "36"},
+    {name: "Chicken Thigh", id: "35"},
+    {name: "Ground Beef", id: "33"},
+    {name: "Salmon", id: "34"},
+    {name: "Shrimp", id: "37"},
 ]
 
-const starterRefridgerator = [
-    {name: "", id: ""},
-    {name: "", id: ""},
-    {name: "", id: ""},
-    {name: "", id: ""},
-    {name: "", id: ""},
+const starterProduce = [
+    {name: "Lettuce", id: "47"},
+    {name: "Tomato", id: "44"},
+    {name: "Onion", id: "41"},
+    {name: "Bell Pepper", id: "42"},
+    {name: "Carrots", id: "43"},
+    {name: "Radish", id: "51"},
+    {name: "Potato", id: "46"},
+    {name: "Green Bean", id: "48"},
+    {name: "Lemon", id: "53"},
+    {name: "Lime", id: "54"},
+    {name: "Orange", id: "52"},
+    {name: "Apple", id: "49"},
+    {name: "Banana", id: "50"},   
+]
+
+const starterEggsDairy = [
+    {name: "Egg", id: "18"},
+    {name: "Butter", id: "20"},
+    {name: "Milk", id: "21"},
+    {name: "Mozzarella Cheese", id: "22"},
+    {name: "Parmesan Cheese", id: "23"},
+    {name: "Cheddar Cheese", id: "25"},
 ]
 
 const customStyles = {
   content: {
+    height: '90%',
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    overflow: 'auto',
+    margin: '1em',
+    padding: '1em',
   },
 };
 
@@ -141,45 +166,181 @@ function WelcomeModal({formData, setUserData, selected}) {
 
     return (
         <div>
-        <button className='text-white' onClick={openModal}>Delete</button>
+        <button className='w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1' onClick={openModal}>Delete</button>
         <Modal
             isOpen={modalIsOpen}
             onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Example Modal"
-        >
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Welcome to MyKitchen</h2>
             
-            <p>You'll want to start by adding some things to MyIngredients</p>
-            <p>MyIngredients should contain items you almost always have on hand. 
+        >
+            <div className='my-8 h-full'>
+            <h2 className='copperplate text-3xl text-center'>Welcome to MyKitchen</h2>
+            
+            <p className='my-4'>You'll want to start by adding some things to MyIngredients</p>
+            <p className='my-4'>MyIngredients should contain items you almost always have on hand. 
                 This way, when you search for recipes, you can see how many ingredients 
                 you probably already have in the house.</p>
             <form onSubmit={handleSubmit}>
-                <p>Baking</p>
-                <table>
-                    <tbody>
-                    {starterBaking.map((ing, index)=>{
-                        return (
-                            <tr key={index}>
-                                <td>
-                                    <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
-                                </td>
-                                <td>
-                                    <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
-                                </td>
+                <div className='flex flex-row flex-wrap justify-around border-solid border-black border-2 items-start'>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Baking</th>
                             </tr>
-                        )
-                    })}
-                    </tbody>
-                </table>
-                
+                        {starterBaking.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Oils/Sauces</th>
+                            </tr>
+                        {starterOilsSauces.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Herbs & Spices</th>
+                            </tr>
+                        {starterHerbsSpices.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Dry Goods</th>
+                            </tr>
+                        {starterDryGoods.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Canned Goods</th>
+                            </tr>
+                        {starterCannedGoods.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Meat & Fish</th>
+                            </tr>
+                        {starterMeatFish.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Produce</th>
+                            </tr>
+                        {starterProduce.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                    <table className='m-4'>
+                        <tbody>
+                            <tr>
+                                <th className='copperplate'>Eggs & Dairy</th>
+                            </tr>
+                        {starterEggsDairy.map((ing, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <label className='text-black min-w-36' htmlFor={ing.name}>{ing.name}</label>
+                                    </td>
+                                    <td>
+                                        <input onChange={handleChange} type="checkbox" name={ing.id} id="" />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                </div>
             
             <input type="submit" className="text-white text-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Continue" />
-            <button className="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={closeModal}>Skip</button>
-
             </form>
-            <button onClick={closeModal}>close</button>
+            </div>
         </Modal>
         </div>
     );

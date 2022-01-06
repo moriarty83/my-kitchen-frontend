@@ -135,6 +135,8 @@ function Auth (props) {
                                 type="submit"
                                 className="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1"
                             >Create Account</button>
+                            <Modal formData={formData} setUserData={setUserData} selected={selected}/>
+
                         </form>
                         <div className="text-center text-sm text-grey-dark mt-4">
                             By signing up, you agree to the 
@@ -212,7 +214,6 @@ function Auth (props) {
                 <input type="text" name="nickname" onChange={handleChange}/>
                 <input type="submit" value={type} />
             </form> */}
-            <Modal formData={formData} setUserData={setUserData} selected={selected}/>
         </div>
     )
 }
