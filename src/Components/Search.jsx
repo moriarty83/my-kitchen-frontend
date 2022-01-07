@@ -8,6 +8,10 @@ function Search ({menuOption, setQuery}){
 
     const navigate = useNavigate();
 
+    const youRule = ()=>{
+        console.log("Just remember, you are awesome!")
+    }
+
     const menuOptions = [
         {
             id: 0,
@@ -61,7 +65,7 @@ function Search ({menuOption, setQuery}){
         return classes.filter(Boolean).join(' ')
     }
 
-    useEffect(()=>{return},[search])
+    useEffect(youRule(),[search])
       
     
     return (
