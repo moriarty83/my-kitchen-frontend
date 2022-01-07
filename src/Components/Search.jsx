@@ -65,8 +65,7 @@ function Search ({menuOption, setQuery}){
         return classes.filter(Boolean).join(' ')
     }
 
-    useEffect(youRule(),[search])
-      
+    useEffect(youRule(),[])
     
     return (
 
