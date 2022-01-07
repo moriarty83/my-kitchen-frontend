@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Account from "../Components/User/Account";
-import Prefs from "../Components/User/Prefs";
 import {useAppState} from "../AppState"
 
 
