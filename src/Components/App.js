@@ -40,7 +40,7 @@ function App(props) {
       }
       else{
         dispatch({type: "logout"})
-        // navigate("/")
+        navigate("/")
       }
         
     }
@@ -160,20 +160,21 @@ const deleteMyIngredient = (id)=>{
       <Route exact path="/" element={<Home/>} />}
 
       <Route path="/auth" element={<Auth />} />
+      
+      { auth ? <>
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
 
-      {/* <Route path="/mykitchen/ingredients" element={<Ingredients />} />  */}
       <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
       <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
       <Route path="/mykitchen/search/ingredients" element={<IngredientSearch addToMyIngredients={addToMyIngredients} />} /> 
-
       
       <Route path="/mykitchen/recipes/all" element={<MyRecipesIndex getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe} />} /> 
       <Route path="/mykitchen/search/recipes" element={<RecipeSearch getMyIngredients={getMyIngredients} />} /> 
       <Route path="/mykitchen/recipe" element={<ShowRecipe getMyIngredients={getMyIngredients} getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe}/>} />
-      {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
-
+      </> : <>      
+      <Route path="*" element={<Home />} />
+      </>}
     </Routes>
     </>
 
