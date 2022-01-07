@@ -5,10 +5,8 @@ import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    { name: 'Sign Up', href: '/auth?query=login' },
+    { name: 'Login', href: '/auth?query=signup' },
   ]
 
 function Home (props) {
@@ -39,10 +37,10 @@ function Home (props) {
                       />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                      {/* <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                         <span className="sr-only">Open main menu</span>
                         <MenuIcon className="h-6 w-6" aria-hidden="true" />
-                      </Popover.Button>
+                      </Popover.Button> */}
                     </div>
                   </div>
                 </div>
@@ -75,7 +73,7 @@ function Home (props) {
                     <div>
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
+                        src="/mykitchen_logo1_black.png"
                         alt=""
                       />
                     </div>
@@ -97,12 +95,12 @@ function Home (props) {
                       </a>
                     ))}
                   </div>
-                  <a
+                  {/* <a
                     href="/auth?query=login"
                     className="block w-full px-5 py-3 text-center font-medium text-blue-600 bg-gray-50 hover:bg-gray-100"
                   >
                     Log in
-                  </a>
+                  </a> */}
                 </div>
               </Popover.Panel>
             </Transition>
