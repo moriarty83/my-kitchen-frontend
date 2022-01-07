@@ -155,12 +155,6 @@ function Account(){
                     </tbody>
                 </table>
                 
-                {/* <div>
-                <form onSubmit={updateNickname}>
-                    <input className="text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 " type="submit" value="Change Nickname" />
-                </form>
-                    
-                </div> */}
 
 
                 

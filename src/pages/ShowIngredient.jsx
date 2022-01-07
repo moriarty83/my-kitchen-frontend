@@ -17,13 +17,10 @@ function ShowIngredient ({deleteMyIngredient, addToMyIngredients}){
     const appId = process.env.REACT_APP_EDEMAM_INGREDIENT_APP_ID;
     const key = process.env.REACT_APP_EDEMAM_INGREDIENT_KEY;
     const [ingredient, setIngredient] = useState();
-    console.log(ingredient)
 
     // URL For API Request
     const ingredientURL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${appId}&app_key=${key}&ingr=${query}&nutrition-type=cooking`
-    console.log(ingredientURL)
     const getIngredient = ()=>{
-        console.log("getting ingredients")
         fetch(ingredientURL,{
             method: "get",
             headers: {
@@ -42,7 +39,6 @@ function ShowIngredient ({deleteMyIngredient, addToMyIngredients}){
         if(state.myIngredients){
             state.myIngredients.some((x, i) => {
                 if(x.edemam_id === ingredientId){
-                    console.log("FOUND")
                 element = 
                 (<button onClick={()=>{deleteMyIngredient(state.myIngredients[i].id)}} className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Delete from MyIngredients
@@ -69,7 +65,6 @@ function ShowIngredient ({deleteMyIngredient, addToMyIngredients}){
     
     // GET MYINGREDIENTS
     const getMyIngredients = ()=>{
-        console.log("token " + token)
         return fetch(state.url+ "/ingredients/",{
             method: "get",
             headers: {

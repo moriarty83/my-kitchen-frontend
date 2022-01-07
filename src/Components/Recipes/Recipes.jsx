@@ -18,7 +18,6 @@ function Recipes () {
     }
 
     const checkIngredients = (recipe) =>{
-        console.log("hello")
         let count = 0;
         for(let i in recipe.ingredients){
             if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){

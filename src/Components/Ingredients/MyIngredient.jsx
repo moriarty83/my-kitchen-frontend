@@ -11,7 +11,6 @@ function MyIngredient ({name, image, id, ingredient}){
 
     // DELETE INGREDIENT //////
     const deleteMyIngredient = (id)=>{
-        console.log("Delete route")
         return fetch(state.url+ "/user_ingredients/"+id,{
             method: "delete",
             headers: { "Authorization": "Bearer " + state.token}

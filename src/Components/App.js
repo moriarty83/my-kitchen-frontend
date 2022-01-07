@@ -43,7 +43,6 @@ function App(props) {
         
     }
     else{
-      console.log("not Logged in")
       // navigate("/")
     }
   }, [])
@@ -64,7 +63,6 @@ function App(props) {
     )}
 
   const getMyIngredients = ()=>{
-    console.log(state.token)
     return fetch(state.url+ "/ingredients/",{
         method: "get",
         headers: {
@@ -111,7 +109,7 @@ function App(props) {
 
 // DELETE INGREDIENT //////
 const deleteMyIngredient = (id)=>{
-  console.log("Delete route")
+
   return fetch(state.url+ "/user_ingredients/"+id,{
       method: "delete",
       headers: { "Authorization": "Bearer " + state.token}
@@ -133,7 +131,6 @@ const deleteMyIngredient = (id)=>{
   // DELETE RECIPE
   const deleteMyRecipe = (id) =>{    
 
-    console.log("Delete route")
     return fetch(state.url+ "/user_recipes/"+id,{
         method: "delete",
         headers: {

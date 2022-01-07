@@ -29,8 +29,6 @@ function Auth (props) {
 
     React.useEffect(()=>{
         if (userData){
-            console.log(userData);
-            console.log(Date.now())
             const {token, user, exp} = userData;
             dispatch({type: "auth", payload: { token, email: user.email, icon: user.icon, exp}})
             window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, nickname: user.nickname, icon: user.icon, exp: exp}))   
@@ -44,7 +42,6 @@ function Auth (props) {
                 return
             }
             else{
-                console.log(state.url+ "/users/")
                 return fetch(state.url+ "/users/",{
                     
                     method: "post",
@@ -67,9 +64,7 @@ function Auth (props) {
                 body: JSON.stringify(formData)
             })
             .then( response => {
-                console.log(response)
                 if(response.ok){
-                    console.log("okay")
                     return response.json()}
                 else{
                     throw new Error("Invalid Username/Password")
@@ -97,7 +92,6 @@ function Auth (props) {
 
 
     const loaded = ()=>{
-        console.log(query)
         if(query === "signup")
             return(
             <div className="bg-grey-lighter min-h-screen flex flex-col my-16">

@@ -109,7 +109,6 @@ function WelcomeModal({formData, setUserData, selected}) {
     const [starterIngredients , setStarterIngredients ] = useState();
 
     const handleChange = (event)=>{
-        console.log(event.target)
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const id = target.name;
@@ -127,7 +126,6 @@ function WelcomeModal({formData, setUserData, selected}) {
         }
         const user = {...formData, icon: selected.file}
         const body = {formData: user, starterIngredients: starters}
-        console.log(body)
         createUser(body)
     }
 

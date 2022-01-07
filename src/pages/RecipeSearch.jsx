@@ -29,7 +29,6 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     const recipeURL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${id}&app_key=${key}&q=${query}`
 
     const searchRecipes = ()=>{
-        console.log("searching recipes")
         fetch(recipeURL,{
             method: "get",
             headers: {
@@ -50,7 +49,6 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     }
 
     const checkIngredients = (recipe) =>{
-        console.log("hello")
         let count = 0;
         for(let i in recipe.ingredients){
             if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){

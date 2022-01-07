@@ -18,7 +18,6 @@ function Recipe({recipe}){
         
         const handleDelete = (id) =>{    
 
-            console.log("Delete route")
             return fetch(state.url+ "/user_recipes/"+id,{
                 method: "delete",
                 headers: {
@@ -37,7 +36,6 @@ function Recipe({recipe}){
             if (state.myIngredients){
                 for(let i in recipe.ingredients){
                     if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
-                        console.log("ingredient match")
                         count += 1
                     }
                 }

@@ -22,7 +22,6 @@ function IngredientSearch ({addToMyIngredients}){
     const ingredientURL = `https://api.edamam.com/auto-complete?app_id=${id}&app_key=${key}&q=${query}&limit=20`
 
     const searchIngredients = ()=>{
-    console.log("Searching")
     fetch(ingredientURL,{
         method: "get",
         headers: {},

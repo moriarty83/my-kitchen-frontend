@@ -7,10 +7,6 @@ function Search ({menuOption, setQuery}){
 
     const navigate = useNavigate();
 
-    const youRule = ()=>{
-        console.log("Just remember, you are awesome!")
-    }
-
     const menuOptions = [
         {
             id: 0,
@@ -45,7 +41,6 @@ function Search ({menuOption, setQuery}){
 
     const handleSubmit = (event)=>{
         const type = selected.name.toLowerCase()
-        console.log(type)
         if(formData.search === ""){
             return
         }
