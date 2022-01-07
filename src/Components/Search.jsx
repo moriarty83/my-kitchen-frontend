@@ -1,8 +1,7 @@
-import React, {useState, Fragment} from "react";
+import React, {useState, Fragment, useEffect} from "react";
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
 
 function Search ({menuOption, setQuery}){
 
@@ -65,8 +64,6 @@ function Search ({menuOption, setQuery}){
         return classes.filter(Boolean).join(' ')
     }
 
-    useEffect(youRule(),[])
-    
     return (
 
     <div className="flex flex-row flex-wrap items-center relative z-20">

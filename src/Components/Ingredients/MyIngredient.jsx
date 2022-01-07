@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
 import { useAppState } from "../../AppState";
 
 function MyIngredient ({name, image, id, ingredient}){
