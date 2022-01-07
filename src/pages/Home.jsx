@@ -5,8 +5,8 @@ import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
-    { name: 'Sign Up', href: '/auth?query=login' },
-    { name: 'Login', href: '/auth?query=signup' },
+    { name: 'Login', href: '/auth?query=login' },
+    { name: 'Sign Up', href: '/auth?query=signup' },
   ]
 
 function Home (props) {
