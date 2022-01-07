@@ -48,7 +48,6 @@ function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
             body: JSON.stringify({name: recipe.label, json: recipeJson})
         })
         .then( (response) => {
-            alert(response)
             if (response.ok){
                 return response.json()}
             else {

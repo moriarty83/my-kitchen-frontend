@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useAppState } from "../../AppState";
 import ItemSlider from "../Slider";
-import MyIngredient from "./MyIngredient";
-
-
 
 function MyIngredients(props){
 

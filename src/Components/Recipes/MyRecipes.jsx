@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useAppState } from "../../AppState";
-import Recipe from "./Recipe";
 import ItemSlider from "../Slider";
 
 function MyRecipes ({viewRecipe}) {
