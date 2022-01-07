@@ -39,15 +39,25 @@ function Delete(props){
     }
 
     const handleCancel = ()=>{
-
+        navigate("/")
     }
 
     const canDelete = ()=>{
             return(        
             <>
-                <h1>Are you Sure You Want to Delete Your Account</h1>
-                    <button onClick={handleConfirm}>Confirm</button>
-                    <button>Cancel</button>
+
+<div className="m-8 flex justify-around">
+                
+                <div className="bg-gray-900 shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 opacity-90">
+                    
+                    
+                    
+                </div>
+    
+                </div>
+                <h1 className="text-white text-2xl">Are you Sure You Want to Delete Your Account</h1>
+                    <button onClick={handleConfirm} className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-red-600 dark:hover:bg-red-700">Confirm</button>
+                    <button onClick={handleCancel}  className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 ">Cancel</button>
             </>)
         
     }

@@ -150,7 +150,7 @@ function Account(){
                             <td className="p-4"><button onClick={updateNickname} className="text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center">Update Profile</button></td>
                             
                             <td></td>
-                            <td className="p-4">{deleteRequested ? <h3>Please Check your Email to Confirm Delete</h3> : <button className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-red-600 dark:hover:bg-red-700" onClick={requestDelete}>Delete Account</button>}</td>
+                            <td className="p-4">{deleteRequested ? <h3 className="text-white text-sm">Please Check your Email to Confirm Delete</h3> : <button className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center  dark:bg-red-600 dark:hover:bg-red-700" onClick={requestDelete}>Delete Account</button>}</td>
                         </tr>
                     </tbody>
                 </table>
