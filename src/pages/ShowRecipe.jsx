@@ -56,7 +56,6 @@ function ShowRecipe ({getMyIngredients, getMyRecipes, deleteMyRecipe}){
             }
             })
         .then((data)=>{
-            window.alert("adding")
             dispatch({type:"myRecipes", payload: data})
         })
         .catch((error) => { window.alert(error)})}

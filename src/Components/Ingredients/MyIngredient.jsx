@@ -25,7 +25,7 @@ function MyIngredient ({name, image, id, ingredient}){
                 throw new Error("An error of type " + response.status + " occured")
             };
         })
-        .then((data)=>{window.alert("Data" + data) 
+        .then((data)=>{
             dispatch({type: "myIngredients", payload: data})})
         .catch((error) => {window.alert(error)}
         );
