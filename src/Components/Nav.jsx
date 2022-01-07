@@ -3,10 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {useAppState} from "../AppState"
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-
-import Options from "./Options";
-
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 function Nav (props){
     const {state, dispatch} = useAppState()
@@ -79,7 +76,7 @@ function Nav (props){
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <h1 className="text-white text-lg copperplate">{state.nickname}</h1>
+                <h1 className="text-white text-lg copperplate">{JSON.parse(window.localStorage.getItem("auth")).nickname}</h1>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">

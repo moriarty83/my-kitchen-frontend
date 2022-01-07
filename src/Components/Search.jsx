@@ -2,24 +2,25 @@ import React, {useState, Fragment} from "react";
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react/cjs/react.development";
 
-function Search (props){
+function Search ({menuOption, setQuery}){
 
     const navigate = useNavigate();
 
     const menuOptions = [
         {
-            id: 1,
+            id: 0,
             name: 'Recipes',
             avatar:
               'https://images.unsplash.com/photo-1572424117831-005b5e9b3ae4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
           },
         {
-        id: 2,
+        id: 1,
         name: 'Ingredients',
         avatar:
           'https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
-      },
+        },
 
     ]
 
@@ -27,7 +28,7 @@ function Search (props){
 
     const [searchType, setSearchType] = useState("Show");
 
-    const [selected, setSelected] = useState(menuOptions[0]);
+    const [selected, setSelected] = useState(menuOptions[menuOption]);
 
     const [search, setSearch] = useState();
 
@@ -45,6 +46,7 @@ function Search (props){
         if(formData.search === ""){
             return
         }
+        setQuery(formData.search.replace(" ", "%20"))
         if(type === 'ingredients'){
             navigate("/mykitchen/search/ingredients?query="+formData.search.replace(" ", "%20"))
             setSearch(search+1)
@@ -53,14 +55,15 @@ function Search (props){
             navigate("/mykitchen/search/recipes?query="+formData.search.replace(" ", "%20"))
             setSearch(search+1)
         }
-        console.log(selected.name.toLowerCase())
-        console.log(formData)
     }
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
-      }
+    }
 
+    useEffect(()=>{},[search])
+      
+    
     return (
 
     <div className="flex flex-row flex-wrap items-center relative z-20">

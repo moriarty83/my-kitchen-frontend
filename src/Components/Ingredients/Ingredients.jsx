@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MyIngredients from "./MyIngredients";
-import IngredientSearch from "./IngredientSearch";
+import IngredientSearch from "../../pages/IngredientSearch";
 import { useAppState } from "../../AppState";
 
 function Ingredients(props){

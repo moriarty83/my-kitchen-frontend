@@ -9,16 +9,14 @@ import Nav from './Nav';
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard';
-import Ingredients from './Ingredients/Ingredients';
-import Recipes from './Recipes/RecipeSearch';
 import ShowIngredient from '../pages/ShowIngredient';
-import IngredientSearch from './Ingredients/IngredientSearch';
+import IngredientSearch from '../pages/IngredientSearch';
 import ShowRecipe from '../pages/ShowRecipe';
 import Profile from '../pages/Profile';
 import Delete from './User/Delete';
 import MyIngredientsIndex from '../pages/MyIngredientsIndex';
 import MyRecipesIndex from '../pages/MyRecipesIndex';
-import RecipeSearch from './Recipes/RecipeSearch';
+import RecipeSearch from '../pages/RecipeSearch';
 
 
 
@@ -167,7 +165,7 @@ const deleteMyIngredient = (id)=>{
 
       <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
       <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
-      <Route path="/mykitchen/search/ingredients" element={<IngredientSearch addToMyIngredients={addToMyIngredients} />} /> 
+      <Route path="/mykitchen/search/ingredients" element={<IngredientSearch addToMyIngredients={addToMyIngredients} menuOption={1}/>} /> 
       
       <Route path="/mykitchen/recipes/all" element={<MyRecipesIndex getMyRecipes={getMyRecipes} deleteMyRecipe={deleteMyRecipe} />} /> 
       <Route path="/mykitchen/search/recipes" element={<RecipeSearch getMyIngredients={getMyIngredients} />} /> 

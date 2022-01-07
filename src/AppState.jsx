@@ -70,11 +70,9 @@ const reducer = (state, action)=>{
             newState = {...state, myIngredients: [...state.myIngredients, action.payload]}
             return newState
         case "recipe":
-            window.alert(action.payload)
             newState = {...state, recipe: action.payload}
             return newState
         case "addRecipe":
-            window.alert("addRecipe dispatch")
             newState = {...state, myRecipes: [...state.myIngredients, action.payload]}
             return newState
         case "navigation":

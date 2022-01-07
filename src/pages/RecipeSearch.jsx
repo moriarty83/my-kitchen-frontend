@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
-import { useAppState } from "../../AppState";
+import { useAppState } from "../AppState";
 
-import Search from "../Search";
+import Search from "../Components/Search";
 
-import Recipe from "./Recipe";
+import Recipe from "../Components/Recipes/Recipe";
 
 function RecipeSearch ({viewRecipe, listIngredients}) {
     const {dispatch, state} = useAppState();
 
     const queryParams = new URLSearchParams(window.location.search)
-    const query = queryParams.get("query")
+    const [query, setQuery] = useState(queryParams.get("query"))
 
 
     /////////////////////
@@ -29,13 +29,15 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     const recipeURL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${id}&app_key=${key}&q=${query}`
 
     const searchRecipes = ()=>{
+        console.log("searching recipes")
         fetch(recipeURL,{
             method: "get",
             headers: {
             },
             })
-            .then( response => response.json()
-                ). then( (data)=> setRecipes(data.hits))}
+            .then( response => response.json())
+            .then( (data)=> setRecipes(data.hits))
+    }
     
     // let ingredinetsList = ingredients ? ingredients.map((ing, index)=>{return<p key={index}>{ing}</p>}) : "Loading...";
     
@@ -81,13 +83,14 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     /////////////////////
     useEffect(()=>{searchRecipes();
         dispatch({type: "navigation", payload: [false, false, true]})
-    }, [])
+    }, [query])
 
     /////////////////////
     // RETURN
     /////////////////////
     return(
         <>
+            <Search menuOption={0} setQuery={setQuery}/>
             <h4 className="text-white underline text-3xl mx-4" id="whoobe-3mr7n">Results for "{query.replace("%20", " ")}"</h4>
             <div className="flex flex-row flex-wrap justify-around">
             { recipes ? loaded() : loading() }

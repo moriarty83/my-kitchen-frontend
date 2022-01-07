@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 
- 
 function ItemSlider ({type, items}){
  
 const loading =()=>{return <h1>Loading...</h1>}
