@@ -164,7 +164,7 @@ function WelcomeModal({formData, setUserData, selected}) {
 
     return (
         <div>
-        <button className='w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1' onClick={openModal}>Delete</button>
+        <button className='w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1' onClick={openModal}>Create Account</button>
         <Modal
             isOpen={modalIsOpen}
             onAfterOpen={afterOpenModal}

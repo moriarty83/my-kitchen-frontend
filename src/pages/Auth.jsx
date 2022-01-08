@@ -125,10 +125,10 @@ function Auth (props) {
                                 name="confirm_password"
                                 placeholder="Confirm Password" />
                             <Avatars selected={selected} setSelected={setSelected} avatars={state.avatars}/>
-                            <button
+                            {/* <button
                                 type="submit"
                                 className="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1"
-                            >Create Account</button>
+                            >Create Account</button> */}
                             <Modal formData={formData} setUserData={setUserData} selected={selected}/>
 
                         </form>
