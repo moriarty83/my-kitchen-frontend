@@ -78,8 +78,6 @@ function Account(){
             const user = responseJson.user
             dispatch({type: "auth", payload: user})
             window.localStorage.setItem("auth", JSON.stringify({ token, email: user.email, nickname: user.nickname, icon: user.icon, exp: responseJson.exp}))   
-
-            console.log(user)
           })
           .catch((error) => {
             window.alert(error)

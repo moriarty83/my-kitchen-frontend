@@ -14,7 +14,6 @@ function MyIngredients(props){
     // FUNCTIONS
     /////////////////////
     const getMyIngredients = ()=>{
-        console.log(state.token)
         return fetch(state.url+ "/ingredients/",{
             method: "get",
             headers: {

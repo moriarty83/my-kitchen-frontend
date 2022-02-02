@@ -14,7 +14,6 @@ function Dashboard (props) {
         let count = 0;
         for(let ingredient in recipe.ingredients){
             if (state.myIngredients.includes(ingredient.food)){
-                console.log("ingredient match")
                 count += 1
             }
         }

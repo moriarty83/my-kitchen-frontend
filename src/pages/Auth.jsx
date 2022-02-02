@@ -181,13 +181,19 @@ function Auth (props) {
 
 
                 </div>
-
+                <div className="text-white mt-6">
+                    {"Forgot your password? "}
+                    <a className="no-underline border-b border-blue text-blue" href="/mykitchen/forgot">
+                        Click here
+                    </a>.
+                </div>
                 <div className="text-white mt-6">
                     {"Don't have an account? "}
                     <a className="no-underline border-b border-blue text-blue" href="/auth?query=signup">
                         Sign up
                     </a>.
                 </div>
+
             </div>
         </div>)
         }

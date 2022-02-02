@@ -52,7 +52,6 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
         let count = 0;
         for(let i in recipe.ingredients){
             if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
-                console.log("ingredient match")
                 count += 1
             }
         }
