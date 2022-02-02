@@ -156,11 +156,12 @@ const deleteMyIngredient = (id)=>{
       <Route exact path="/" element={<Home/>} />}
 
       <Route path="/auth" element={<Auth />} />
+      <Route path="/mykitchen/forgot/" element={<Forgot />} />
       
       { auth ? <>
       <Route path="/mykitchen/account" element={<Profile />} />
       <Route path="/mykitchen/delete/:id" element={<Delete />} />
-      <Route path="/mykitchen/forgot/" element={<Forgot />} />
+      
 
       <Route path="/mykitchen/ingredients/all" element={<MyIngredientsIndex getMyIngredients={getMyIngredients}  deleteMyIngredient={deleteMyIngredient} />} /> 
       <Route path="/mykitchen/ingredient" element={<ShowIngredient addToMyIngredients={addToMyIngredients} deleteMyIngredient={deleteMyIngredient}/>} />
