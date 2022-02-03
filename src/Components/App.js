@@ -17,7 +17,7 @@ import Delete from './User/Delete';
 import MyIngredientsIndex from '../pages/MyIngredientsIndex';
 import MyRecipesIndex from '../pages/MyRecipesIndex';
 import RecipeSearch from '../pages/RecipeSearch';
-import Forgot from './User/Forgot';
+import Forgot from '../pages/Forgot';
 
 
 

@@ -4,6 +4,7 @@ import { useAppState } from "../AppState"
 import Avatars from "../Components/Avatars";
 import Modal from "../Components/WelcomeModal";
 
+
 function Auth (props) {
 
     const params = useParams()
@@ -125,10 +126,7 @@ function Auth (props) {
                                 name="confirm_password"
                                 placeholder="Confirm Password" />
                             <Avatars selected={selected} setSelected={setSelected} avatars={state.avatars}/>
-                            {/* <button
-                                type="submit"
-                                className="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1"
-                            >Create Account</button> */}
+
                             <Modal formData={formData} setUserData={setUserData} selected={selected}/>
 
                         </form>
