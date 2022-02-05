@@ -8,11 +8,9 @@ function Forgot(){
 
 
     const handleSubmit = () =>{
-        return fetch(state.url+ "/password/forgot",{
-            
+        return fetch(state.url+ "/users/forgot",{
             method: "post",
             headers: {
-                "Authorization": "Bearer " + state.token,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({email: formData.email})
