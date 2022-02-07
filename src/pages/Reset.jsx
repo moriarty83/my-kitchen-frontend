@@ -1,24 +1,30 @@
 import React, {useState} from "react"
-
+import { useParams } from "react-router-dom";
 import {useAppState} from "../AppState"
 
-function Reset(){
+function Reset(props){
     const {state, dispatch} = useAppState();
+    let params = useParams();
     const [formData, setFormData] = useState();
-
-
+    console.log(params.token)
     const handleSubmit = () =>{
-        // return fetch(state.url+ "/users/rest",{
-        //     method: "post",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({email: formData.email})
-        // })
-        // .then( response => response.json()
+        if(formData.password !== formData.confirm_password){
+            window.alert("Passwords Do Not Match")
+            return
+        }
+        else{
+            console.log()
+        return fetch(state.url+ "/users/reset",{
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({token: params.token, password: formData.password})
+        })
+        .then( response => response.json()
         
-        // ).then(json => console.log(json))
-        
+        ).then(json => console.log(json))  
+        }
     }
 
     const handleChange = (event) =>{

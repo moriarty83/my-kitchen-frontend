@@ -158,7 +158,7 @@ const deleteMyIngredient = (id)=>{
 
       <Route path="/auth" element={<Auth />} />
       <Route path="/mykitchen/forgot" element={<Forgot />} />
-      <Route path="/mykitchen/reset" element={<Reset />} />
+      <Route path="/mykitchen/reset/:token" element={<Reset />} />
 
       
       { auth ? <>
