@@ -29,8 +29,7 @@ function Reset(props){
                 window.alert("Password Reset. Return to Login")
             }
             else{
-                let json = response.json()
-                console.log(json)
+                console.log(response)
                 window.alert("Error: " + response.json().body)
             }
             })
