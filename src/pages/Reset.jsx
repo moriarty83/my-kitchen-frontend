@@ -28,10 +28,10 @@ function Reset(props){
             if(response.ok){
                 window.alert("Password Reset. Return to Login")
             }
-            // else{
+            else{
                 
-            //     throw new Error("An error occured")
-            // }
+                window.alert("Error: " + response.body)
+            }
             })
             .catch((error) => {
                 window.alert(error)
