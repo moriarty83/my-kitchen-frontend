@@ -29,12 +29,13 @@ function Reset(props){
                 window.alert("Password Reset. Return to Login")
             }
             else{
-                
-                window.alert("Error: " + response.json().error)
+                let json = response.json()
+                console.log(json)
+                window.alert("Error: " + response.json().body)
             }
             })
             .catch((error) => {
-                window.alert(error)
+                console.log(error)
               });
         }
     }
