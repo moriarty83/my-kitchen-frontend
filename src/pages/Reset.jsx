@@ -29,6 +29,7 @@ function Reset(props){
                 window.alert("Password Reset. Return to Login")
             }
             else{
+                window.alert("oh no!")
                 throw new Error(response.body)
             }
             })
