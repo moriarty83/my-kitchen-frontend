@@ -1,15 +1,18 @@
 import React, {useState} from "react"
-import { useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import {useAppState} from "../AppState"
 
 function Reset(props){
     const {state, dispatch} = useAppState();
     let params = useParams();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState();
 
     const handleSubmit = () =>{
         if(formData.password !== formData.confirm){
             window.alert("Passwords Do Not Match")
+            navigate("/auth?query=login")
             return
         }
         else{
@@ -21,9 +24,14 @@ function Reset(props){
             },
             body: JSON.stringify({token: params.token, password: formData.password})
         })
-        .then( response => response.json()
-        
-        ).then(json => console.log(json))  
+        .then( (response) => {
+            if(response.ok){
+                window.alert("Password Reset. Return to Login")
+            }
+            else{
+                throw new Error(response.body)
+            }
+            })
         }
     }
 
