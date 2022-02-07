@@ -18,6 +18,7 @@ import MyIngredientsIndex from '../pages/MyIngredientsIndex';
 import MyRecipesIndex from '../pages/MyRecipesIndex';
 import RecipeSearch from '../pages/RecipeSearch';
 import Forgot from '../pages/Forgot';
+import Reset from '../pages/Reset';
 
 
 
@@ -156,7 +157,9 @@ const deleteMyIngredient = (id)=>{
       <Route exact path="/" element={<Home/>} />}
 
       <Route path="/auth" element={<Auth />} />
-      <Route path="/mykitchen/forgot/" element={<Forgot />} />
+      <Route path="/mykitchen/forgot" element={<Forgot />} />
+      <Route path="/mykitchen/reset" element={<Reset />} />
+
       
       { auth ? <>
       <Route path="/mykitchen/account" element={<Profile />} />
