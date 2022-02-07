@@ -6,14 +6,14 @@ function Reset(props){
     const {state, dispatch} = useAppState();
     let params = useParams();
     const [formData, setFormData] = useState();
-    console.log(params.token)
+
     const handleSubmit = () =>{
-        if(formData.password !== formData.confirm_password){
+        if(formData.password !== formData.confirm){
             window.alert("Passwords Do Not Match")
             return
         }
         else{
-            console.log()
+
         return fetch(state.url+ "/users/reset",{
             method: "post",
             headers: {
@@ -29,7 +29,6 @@ function Reset(props){
 
     const handleChange = (event) =>{
         setFormData({...formData, [event.target.name]: event.target.value})
-        console.log(formData)
     }
 
     return(
