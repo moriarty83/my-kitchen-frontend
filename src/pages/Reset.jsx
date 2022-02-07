@@ -30,7 +30,7 @@ function Reset(props){
             }
             else{
                 
-                window.alert("Error: " + response.body)
+                window.alert("Error: " + response.json().error)
             }
             })
             .catch((error) => {
