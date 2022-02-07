@@ -41,15 +41,15 @@ function Reset(props){
                         <form onSubmit={handleSubmit}>
                             <input 
                                 onChange={handleChange}
-                                type="text"
+                                type="password"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="email"
+                                name="password"
                                 placeholder="New Password" />
                                                             <input 
                                 onChange={handleChange}
-                                type="text"
+                                type="password"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="email"
+                                name="confirm"
                                 placeholder="Re-Enter New Password" />
                         </form>
                         <button
