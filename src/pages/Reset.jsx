@@ -29,8 +29,7 @@ function Reset(props){
                 window.alert("Password Reset. Return to Login")
             }
             else{
-                console.log(response)
-                window.alert("Error: " + response.json().body)
+                window.alert("Link not valid or expired. Try generating a new link.")
             }
             })
             .catch((error) => {
