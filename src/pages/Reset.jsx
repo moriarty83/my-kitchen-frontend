@@ -27,6 +27,7 @@ function Reset(props){
         .then( (response) => {
             if(response.ok){
                 window.alert("Password Reset. Return to Login")
+                navigate("/auth?query=login")
             }
             else{
                 window.alert("Link not valid or expired. Try generating a new link.")

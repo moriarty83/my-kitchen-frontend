@@ -15,7 +15,14 @@ function Forgot(){
             },
             body: JSON.stringify({email: formData.email})
         })
-        .then( response => response.json()
+        .then( (response) => {
+            if(response.ok){
+                window.alert("Please check your e-mail for instructions to reset your password")
+            }
+            else{
+                window.alert("An error occured, please double check your e-mail and try again")
+            }
+        }
         
         ).then(json => console.log(json))
         
