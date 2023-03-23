@@ -13,7 +13,9 @@ function MyIngredientsIndex({getMyIngredients, deleteMyIngredient}){
     }
 
     const loaded = ()=>{
-        const elements = state.myIngredients.map((element, index)=>{
+        let elements = null
+        if (state.myIngredients.length > 0){
+        elements = state.myIngredients.map((element, index)=>{
             return (
                 <div key={index} className="flex flex-col items-center bg-gray-900 shadow-md border border-gray-200 rounded-lg w-56 dark:bg-gray-800 dark:border-gray-700 opacity-90 m-4"> 
                     <img className="rounded-t-lg w-full" src={element.image_url} alt="" />
@@ -32,6 +34,10 @@ function MyIngredientsIndex({getMyIngredients, deleteMyIngredient}){
                 </div>
             )
         })
+    }
+    else{
+        elements = <h1>You do not have any saved ingredients.</h1>
+    }
         return elements
     }
 
