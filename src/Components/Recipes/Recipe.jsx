@@ -35,7 +35,7 @@ function Recipe({recipe}){
             let count = 0;
             if (state.myIngredients){
                 for(let i in recipe.ingredients){
-                    if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
+                    if (state.myIngredients.length && state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
                         count += 1
                     }
                 }

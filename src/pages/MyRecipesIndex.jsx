@@ -13,7 +13,9 @@ function MyRecipesIndex({getMyRecipes, deleteMyRecipe}){
     }
 
     const loaded = ()=>{
-        const elements = state.myRecipes.map((element, index)=>{
+        let elements = <h2 class="text-white">You don't have any saved recipes</h2>
+        if(state.myRecipes.length > 0){
+        elements = state.myRecipes.map((element, index)=>{
             const recipe = JSON.parse(element.json)
             const id = recipe.uri.split("#")[1]
             return (
@@ -34,6 +36,7 @@ function MyRecipesIndex({getMyRecipes, deleteMyRecipe}){
                 </div>
             )
         })
+        }
         return elements
     }
 

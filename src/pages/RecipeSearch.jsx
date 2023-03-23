@@ -51,7 +51,7 @@ function RecipeSearch ({viewRecipe, listIngredients}) {
     const checkIngredients = (recipe) =>{
         let count = 0;
         for(let i in recipe.ingredients){
-            if (state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
+            if (state.myIngredients.length && state.myIngredients.some(item => item.edemam_id === recipe.ingredients[i].foodId)){
                 count += 1
             }
         }

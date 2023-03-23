@@ -36,7 +36,7 @@ function MyIngredientsIndex({getMyIngredients, deleteMyIngredient}){
         })
     }
     else{
-        elements = <h1>You do not have any saved ingredients.</h1>
+        elements = <h2 class="text-white">You do not have any saved ingredients.</h2>
     }
         return elements
     }
